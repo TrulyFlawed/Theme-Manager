@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
+/* Our default theme is dark right now, but if we wanted to change that we'd use the variables from a different theme. */
+/* This is because we're using a seperate dark theme instance, and thus can change the default at any time without removing our dark theme. */
+:root {
+	--primary-text: #fff;
+	--primary-background: #000;
+}
+:root .dark-theme {
+	--primary-text: #fff;
+	--primary-background: #000;
+}
+:root .light-theme {
+	--primary-text: #000;
+	--primary-background: #fff;
+}
+:root .pink-theme {
+	--primary-text: #000;
+	--primary-background: #ffc5ec;
+}
+
+body {
+	background-color: var(--primary-background);
+	color: var(--primary-text);
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-family: 'Inter';
+	flex-direction: column;
+}
+button {
+	background-color: var(--primary-text);
+	color: var(--primary-background);
+	border: none;
+	outline: none;
+	font-size: 20px;
+	padding: 10px;
+	font-weight: 600;
+}
+a {
+	text-decoration: underline;
+	color: var(--primary-text);
+}
