@@ -15,19 +15,26 @@
 }
 :root .pink-theme {
 	--primary-text: #000;
-	--primary-background: #ffc5ec;
+	--primary-background: #F5A9B8;
+}
+:root .blue-theme {
+	--primary-text: #000;
+	--primary-background: #5BCEFA;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Inter", sans-serif;
+}
 body {
 	background-color: var(--primary-background);
 	color: var(--primary-text);
-	margin: 0;
-	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	font-family: 'Inter';
 	flex-direction: column;
 }
 button {
@@ -38,8 +45,12 @@ button {
 	font-size: 20px;
 	padding: 10px;
 	font-weight: 600;
+	margin-bottom: 5px;
 }
 a {
 	text-decoration: underline;
 	color: var(--primary-text);
+}
+p {
+	margin: 5px;
 }
