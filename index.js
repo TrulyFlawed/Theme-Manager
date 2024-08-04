@@ -1,11 +1,13 @@
 function changeTheme() {
-	if ('dark-theme' == document.body.className) {
+	const currentTheme = document.body.className;
+	
+	if ('dark-theme' == currentTheme) {
 		document.body.className = "light-theme";
 	}
-	else if ('light-theme' == document.body.className) {
+	else if ('light-theme' == currentTheme) {
 		document.body.className = "pink-theme";
 	}
-	else if ('pink-theme' == document.body.className) {
+	else if ('pink-theme' == currentTheme) {
 		document.body.className = "blue-theme";
 	}
 	else {
