@@ -5,31 +5,26 @@
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
-	--secondary-background: #fff;
 }
 :root .dark-theme {
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
-	--secondary-background: #fff;
 }
 :root .light-theme {
 	--primary-text: #000;
 	--primary-background: #fff;
 	--secondary-text: #fff;
-	--secondary-background: #000;
 }
 :root .pink-theme {
 	--primary-text: #000;
 	--primary-background: #F5A9B8;
 	--secondary-text: #fff;
-	--secondary-background: #000;
 }
 :root .blue-theme {
 	--primary-text: #000;
 	--primary-background: #5BCEFA;
 	--secondary-text: #fff;
-	--secondary-background: #000;
 }
 
 * {
