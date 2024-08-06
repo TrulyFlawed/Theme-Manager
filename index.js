@@ -1,4 +1,4 @@
-function changeTheme() {
+function cycleTheme() {
 	const currentTheme = document.body.className;
 	
 	if ('dark-theme' == currentTheme) {
