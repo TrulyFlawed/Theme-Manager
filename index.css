@@ -53,6 +53,11 @@ button {
 	font-weight: 600;
 	margin-bottom: 5px;
 }
+button:focus {
+	border: auto;
+	outline: auto;
+	outline-offset: 2px;
+}
 a {
 	text-decoration: underline;
 	color: var(--primary-text);
