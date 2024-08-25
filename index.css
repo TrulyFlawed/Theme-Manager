@@ -53,8 +53,7 @@ button {
 	font-weight: 600;
 	margin-bottom: 5px;
 }
-button:focus {
-	border: auto;
+button:focus-visible {
 	outline: auto;
 	outline-offset: 2px;
 }
