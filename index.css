@@ -55,6 +55,7 @@ button {
 	padding: 10px;
 	font-weight: 600;
 	margin-bottom: 5px;
+	border-radius: 11px;
 }
 button:focus-visible {
 	outline: auto;
