@@ -1,11 +1,22 @@
 const body = document.body;
 const themes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
+let activeIndex = (themes.findIndex((theme) => body.classList.contains(theme)) + themes.length) % themes.length;
+console.log(activeIndex)
 
-function cycleTheme() {
-	const activeIndex = themes.findIndex((theme) => body.classList.contains(theme));
-	const nextIndex = (activeIndex + 1) % themes.length;
+function nextTheme() {
+	let nextIndex = activeIndex + 1;
+	nextIndex = (nextIndex + themes.length) % themes.length;
 
 	body.classList.replace(themes[activeIndex], themes[nextIndex]);
+	activeIndex = nextIndex;
+}
+
+function previousTheme() {
+	let previousIndex = activeIndex - 1;
+	previousIndex = (previousIndex + themes.length) % themes.length;
+
+	body.classList.replace(themes[activeIndex], themes[previousIndex]);
+	activeIndex = previousIndex;
 }
 
 function randomTheme() {
