@@ -1,30 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 /* Our default theme is dark right now, but if we wanted to change that we'd use the variables from a different theme. */
 /* This is because we're using a seperate dark theme instance, and thus can change the default at any time without removing our dark theme. */
 :root {
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
+	--button-hover: #ffffffdc;
 }
 :root .dark-theme {
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
+	--button-hover: #ffffffdc;
 }
 :root .light-theme {
 	--primary-text: #000;
 	--primary-background: #fff;
 	--secondary-text: #fff;
+	--button-hover: #333333;
 }
 :root .pink-theme {
 	--primary-text: #000;
 	--primary-background: #F5A9B8;
 	--secondary-text: #fff;
+	--button-hover: #333333;
 }
 :root .blue-theme {
 	--primary-text: #000;
 	--primary-background: #5BCEFA;
 	--secondary-text: #fff;
+	--button-hover: #333333;
 }
 
 *,
@@ -60,6 +66,9 @@ button {
 button:focus-visible {
 	outline: auto;
 	outline-offset: 2px;
+}
+button:hover {
+	background-color: var(--button-hover);
 }
 a {
 	text-decoration: underline;
