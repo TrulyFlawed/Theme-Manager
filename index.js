@@ -19,8 +19,8 @@ function previousTheme() {
 }
 
 function randomTheme() {
-	const activeIndex = themes.findIndex((theme) => body.classList.contains(theme));
 	const randomTheme = Math.floor(Math.random() * themes.length);
 
 	body.classList.replace(themes[activeIndex], themes[randomTheme]);
+	activeIndex = randomTheme;
 }
