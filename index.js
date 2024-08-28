@@ -1,7 +1,6 @@
 const body = document.body;
 const themes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
-let activeIndex = (themes.findIndex((theme) => body.classList.contains(theme)) + themes.length) % themes.length;
-console.log(activeIndex)
+let activeIndex = themes.findIndex((theme) => body.classList.contains(theme));
 
 function nextTheme() {
 	let nextIndex = activeIndex + 1;
