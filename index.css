@@ -62,6 +62,7 @@ button {
 	font-weight: 600;
 	margin-bottom: 5px;
 	border-radius: 11px;
+	transition: ease 0.15s;
 }
 button:focus-visible {
 	outline: auto;
