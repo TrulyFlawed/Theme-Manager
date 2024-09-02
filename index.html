@@ -8,10 +8,12 @@
 	<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"  />
 </head>
 <body class="dark-theme">
-	<button id="next-theme-button" type="button" onclick="nextTheme()"><i class='bx bx-right-arrow-alt'></i>Next Theme</button>
-	<button id="previous-theme-button" type="button" onclick="previousTheme()"><i class='bx bx-left-arrow-alt'></i>Previous Theme</button>
-	<button id="random-theme-button" type="button" onclick="randomTheme()"><i class='bx bx-dice-3'></i>Random Theme</button>
-	<p>The source code for this project can be found <a href="https://github.com/TrulyFlawed/Theme-Switcher">here</a></p>
+	<div class="misc-theme-switches">
+		<button id="previous-theme-button" type="button" onclick="previousTheme()" aria-label="Previous Theme"><i class='bx bx-left-arrow-alt'></i></button>
+		<button id="random-theme-button" type="button" onclick="randomTheme()"><i class='bx bx-dice-3'></i>Random Theme</button>
+		<button id="next-theme-button" type="button" onclick="nextTheme()" aria-label="Next Theme"><i class='bx bx-right-arrow-alt'></i></button>
+	</div>
+	<p>The source code and other info for this project can be found <a href="https://github.com/TrulyFlawed/Theme-Switcher">here</a></p>
 	<p>Created by: TrulyFlawed/Duskfall</p>
 	<script src="index.js"></script>
 </body>
