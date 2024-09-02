@@ -8,6 +8,12 @@
 	<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"  />
 </head>
 <body class="dark-theme">
+	<div class="main-theme-switches">
+		<button id="dark-theme-button" class="active-theme theme-buttons" data-theme="dark-theme" type="button" onclick="selectTheme()" aria-label="Select dark theme"></button>
+		<button id="light-theme-button" class="theme-buttons" data-theme="light-theme" type="button" onclick="selectTheme()" aria-label="Select light theme"></button>
+		<button id="pink-theme-button" class="theme-buttons" data-theme="pink-theme" type="button" onclick="selectTheme()" aria-label="Select pink theme"></button>
+		<button id="blue-theme-button" class="theme-buttons" data-theme="blue-theme" type="button" onclick="selectTheme()" aria-label="Select blue theme"></button>
+	</div>
 	<div class="misc-theme-switches">
 		<button id="previous-theme-button" type="button" onclick="previousTheme()" aria-label="Previous Theme"><i class='bx bx-left-arrow-alt'></i></button>
 		<button id="random-theme-button" type="button" onclick="randomTheme()"><i class='bx bx-dice-3'></i>Random Theme</button>

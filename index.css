@@ -86,7 +86,39 @@ button i {
 	align-items: center;
 	justify-content: center;
 	font-size: 24px;
-	/* margin-right: 5px */
+}
+.main-theme-switches {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 5px;
+}
+.main-theme-switches button {
+	height: 44px;
+	width: 44px;
+	border-radius: 50%;
+	border: 2px solid var(--primary-text);
+	background-color: #F5A9B8;
+}
+.main-theme-switches button.active-theme {
+	outline: 2px solid var(--primary-text);
+	outline-offset: 3px;
+}
+.main-theme-switches button.active-theme:focus-visible {
+	outline-width: 4px;
+}
+.main-theme-switches [data-theme="dark-theme"] {
+	background-color: #000;
+}
+.main-theme-switches [data-theme="light-theme"] {
+	background-color: #fff;
+}
+.main-theme-switches [data-theme="pink-theme"] {
+	background-color: #F5A9B8;
+}
+.main-theme-switches [data-theme="blue-theme"] {
+	background-color: #5BCEFA;
 }
 .misc-theme-switches {
 	display: flex;
