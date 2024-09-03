@@ -10,7 +10,9 @@ function nextTheme() {
 	body.classList.replace(themes[activeIndex], themes[nextIndex]);
 	activeIndex = nextIndex;
 
+	let activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${themes[activeIndex]}]`);
 	themeButtons.forEach(button => button.classList.remove('active-theme'));
+	activeThemeButton.classList.add("active-theme");
 }
 
 function previousTheme() {
@@ -20,7 +22,9 @@ function previousTheme() {
 	body.classList.replace(themes[activeIndex], themes[previousIndex]);
 	activeIndex = previousIndex;
 
+	let activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${themes[activeIndex]}]`);
 	themeButtons.forEach(button => button.classList.remove('active-theme'));
+	activeThemeButton.classList.add("active-theme");
 }
 
 function randomTheme() {
@@ -29,7 +33,9 @@ function randomTheme() {
 	body.classList.replace(themes[activeIndex], themes[randomTheme]);
 	activeIndex = randomTheme;
 
+	let activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${themes[activeIndex]}]`);
 	themeButtons.forEach(button => button.classList.remove('active-theme'));
+	activeThemeButton.classList.add("active-theme");
 }
 
 function selectTheme() {
