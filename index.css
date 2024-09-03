@@ -101,11 +101,19 @@ button i {
 	border: 2px solid var(--primary-text);
 	background-color: #F5A9B8;
 }
+.main-theme-switches button:hover {
+	outline: 2px dashed var(--primary-text);
+	outline-style: dashed;
+	outline-offset: 3px;
+}
 .main-theme-switches button.active-theme {
 	outline: 2px solid var(--primary-text);
 	outline-offset: 3px;
 }
 .main-theme-switches button.active-theme:focus-visible {
+	outline-width: 4px;
+}
+.main-theme-switches button.active-theme:hover {
 	outline-width: 4px;
 }
 .main-theme-switches [data-theme="dark-theme"] {
