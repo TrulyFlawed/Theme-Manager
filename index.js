@@ -39,16 +39,16 @@ function randomTheme() {
 }
 
 function selectTheme() {
-	themeButtons.forEach((theme =>
-		theme.addEventListener('click', () => {
-			let selectedTheme = theme.getAttribute("data-theme");
+	themeButtons.forEach((button =>
+		button.addEventListener('click', () => {
+			let selectedTheme = button.getAttribute("data-theme");
 			let selectedIndex = themes.findIndex((theme) => body.classList.contains(theme));
 
 			body.classList.replace(themes[activeIndex], selectedTheme);
 			activeIndex = selectedIndex;
 
 			themeButtons.forEach(button => button.classList.remove('active-theme'));
-			theme.classList.add("active-theme");
+			button.classList.add("active-theme");
 		})
 	));
 }
