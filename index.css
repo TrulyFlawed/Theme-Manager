@@ -56,7 +56,7 @@ button {
 	background-color: var(--primary-text);
 	color: var(--secondary-text);
 	border: none;
-	outline: none;
+	/* outline: none; */
 	font-size: 20px;
 	padding: 10px;
 	font-weight: 600;
@@ -103,18 +103,21 @@ button i {
 }
 .main-theme-switches button:hover {
 	outline: 2px dashed var(--primary-text);
-	outline-style: dashed;
 	outline-offset: 3px;
 }
 .main-theme-switches button.active-theme {
 	outline: 2px solid var(--primary-text);
 	outline-offset: 3px;
 }
-.main-theme-switches button.active-theme:focus-visible {
-	outline-width: 4px;
-}
 .main-theme-switches button.active-theme:hover {
-	outline-width: 4px;
+	outline: 6px solid var(--primary-text);
+	outline-offset: 0px;
+	border: none;
+}
+.main-theme-switches button.active-theme:focus-visible {
+	outline: 6px solid var(--primary-text);
+	outline-offset: 0px;
+	border: none;
 }
 .main-theme-switches [data-theme="dark-theme"] {
 	background-color: #000;
