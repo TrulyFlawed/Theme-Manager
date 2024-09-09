@@ -73,6 +73,7 @@ button:hover {
 a {
 	text-decoration: underline;
 	color: var(--primary-text);
+	transition: ease 0.15s;
 }
 p {
 	margin: 5px;
