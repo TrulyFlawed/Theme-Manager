@@ -88,7 +88,7 @@ button i {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 10px;
+	gap: 15px;
 	margin-bottom: 5px;
 }
 .main-theme-switches button {
@@ -99,11 +99,15 @@ button i {
 	background-color: #F5A9B8;
 }
 .main-theme-switches button:hover {
-	outline: 2px dashed var(--primary-text);
+	outline: 2px solid var(--primary-text);
+	outline-offset: 3px;
+}
+.main-theme-switches button:focus-visible {
+	outline: 2px solid var(--primary-text);
 	outline-offset: 3px;
 }
 .main-theme-switches button.active-theme {
-	outline: 2px solid var(--primary-text);
+	outline: 4px solid var(--primary-text);
 	outline-offset: 3px;
 }
 .main-theme-switches button.active-theme:hover {
