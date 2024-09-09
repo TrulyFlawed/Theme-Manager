@@ -1,50 +1,49 @@
 const body = document.body;
 const themes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
 let activeIndex = themes.findIndex((theme) => body.classList.contains(theme));
+let newIndex;
 let themeButtons = document.querySelectorAll(".theme-buttons");
 
 function nextTheme() {
-	let nextIndex = activeIndex + 1;
-	nextIndex = (nextIndex + themes.length) % themes.length;
+	newIndex = activeIndex + 1;
+	newIndex = (newIndex + themes.length) % themes.length;
 
-	body.classList.replace(themes[activeIndex], themes[nextIndex]);
-	activeIndex = nextIndex;
-
-	updateThemeButtons()
+	updateTheme();
 }
 
 function previousTheme() {
-	let previousIndex = activeIndex - 1;
-	previousIndex = (previousIndex + themes.length) % themes.length;
+	newIndex = activeIndex - 1;
+	newIndex = (newIndex + themes.length) % themes.length;
 
-	body.classList.replace(themes[activeIndex], themes[previousIndex]);
-	activeIndex = previousIndex;
-
-	updateThemeButtons()
+	updateTheme();
 }
 
 function randomTheme() {
-	const randomTheme = Math.floor(Math.random() * themes.length);
+	newIndex = Math.floor(Math.random() * themes.length);
 
-	body.classList.replace(themes[activeIndex], themes[randomTheme]);
-	activeIndex = randomTheme;
-
-	updateThemeButtons()
+	updateTheme();
 }
 
 function selectTheme() {
-	themeButtons.forEach((button =>
-		button.addEventListener('click', () => {
-			let selectedTheme = button.getAttribute("data-theme");
-			let selectedIndex = themes.findIndex((theme) => body.classList.contains(theme));
+	const themeButtonWrapper = document.querySelector(".main-theme-switches");
+	
+	themeButtonWrapper.addEventListener("click", (event) => {
+		if (event.target.tagName === "BUTTON") {
+			let selectedTheme = event.target.getAttribute("data-theme");
+			newIndex = themes.indexOf(selectedTheme);
+			
+			updateTheme();
+		}
+		else {
+			console.log("Clicked element was not a button.");
+		}
+	})
+}
 
-			body.classList.replace(themes[activeIndex], selectedTheme);
-			activeIndex = selectedIndex;
-
-			themeButtons.forEach(button => button.classList.remove('active-theme'));
-			button.classList.add("active-theme");
-		})
-	));
+function updateTheme() {
+	body.classList.replace(themes[activeIndex], themes[newIndex]);
+	activeIndex = newIndex;
+	updateThemeButtons();
 }
 
 function updateThemeButtons() {
