@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* Our default theme is dark right now, but if we wanted to change that we'd use the variables from a different theme. */
-/* This is because we're using a seperate dark theme instance, and thus can change the default at any time without removing our dark theme. */
 :root {
 	--primary-text: #fff;
 	--primary-background: #000;
@@ -56,7 +54,6 @@ button {
 	background-color: var(--primary-text);
 	color: var(--secondary-text);
 	border: none;
-	/* outline: none; */
 	font-size: 20px;
 	padding: 10px;
 	font-weight: 600;
