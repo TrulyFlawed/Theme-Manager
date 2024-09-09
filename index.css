@@ -91,6 +91,7 @@ button i {
 	justify-content: center;
 	gap: 15px;
 	margin-bottom: 5px;
+	flex-wrap: wrap;
 }
 .main-theme-switches button {
 	height: 44px;
