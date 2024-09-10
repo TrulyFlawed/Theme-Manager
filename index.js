@@ -18,9 +18,8 @@ function previousTheme() {
 }
 
 function randomTheme() {
-	randomIndex = Math.floor(Math.random() * themes.length);
-	if (randomIndex !== activeIndex) {
-		newIndex = randomIndex;
+	newIndex = Math.floor(Math.random() * themes.length);
+	if (newIndex !== activeIndex) {
 		updateTheme();
 	}
 	else {
