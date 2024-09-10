@@ -90,7 +90,7 @@ button i {
 	align-items: center;
 	justify-content: center;
 	gap: 15px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	flex-wrap: wrap;
 }
 .main-theme-switches button {
