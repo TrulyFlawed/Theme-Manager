@@ -139,4 +139,10 @@ button i {
 	align-items: center;
 	justify-content: center;
 	gap: 5px;
+	flex-wrap: wrap;
+}
+@media (max-width: 300px) {
+	.misc-theme-switches span {
+		display: none;
+	}
 }
