@@ -64,11 +64,14 @@ button {
 	gap: 5px;
 }
 button:focus-visible {
-	outline: auto;
-	outline-offset: 2px;
+	background-color: var(--background);
+	color: var(--primary-text);
+	outline: 2px solid var(--primary-text);
 }
 button:hover {
-	background-color: var(--button-hover);
+	background-color: var(--background);
+	color: var(--primary-text);
+	outline: 2px solid var(--primary-text);
 }
 a {
 	text-decoration: underline;
