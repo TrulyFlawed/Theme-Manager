@@ -35,7 +35,7 @@ function selectTheme() {
 			updateTheme();
 		}
 		else {
-			console.log("Clicked element was not a button.");
+			return
 		}
 	})
 }
@@ -43,10 +43,7 @@ function selectTheme() {
 function updateTheme() {
 	body.classList.replace(themes[activeIndex], themes[newIndex]);
 	activeIndex = newIndex;
-	updateThemeButtons();
-}
 
-function updateThemeButtons() {
 	let activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${themes[activeIndex]}]`);
 	themeButtons.forEach(button => button.classList.remove('active-theme'));
 	activeThemeButton.classList.add("active-theme");
