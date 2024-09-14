@@ -64,12 +64,12 @@ button {
 	gap: 5px;
 }
 button:focus-visible {
-	background-color: var(--background);
+	background-color: var(--primary-background);
 	color: var(--primary-text);
 	outline: 2px solid var(--primary-text);
 }
 button:hover {
-	background-color: var(--background);
+	background-color: var(--primary-background);
 	color: var(--primary-text);
 	outline: 2px solid var(--primary-text);
 }
