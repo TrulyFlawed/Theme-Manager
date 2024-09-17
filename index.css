@@ -4,31 +4,26 @@
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
-	--button-hover: #ffffffdc;
 }
 :root .dark-theme {
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
-	--button-hover: #ffffffdc;
 }
 :root .light-theme {
 	--primary-text: #000;
 	--primary-background: #fff;
 	--secondary-text: #fff;
-	--button-hover: #333333;
 }
 :root .pink-theme {
 	--primary-text: #000;
 	--primary-background: #F5A9B8;
 	--secondary-text: #fff;
-	--button-hover: #333333;
 }
 :root .blue-theme {
 	--primary-text: #000;
 	--primary-background: #5BCEFA;
 	--secondary-text: #fff;
-	--button-hover: #333333;
 }
 
 *,
