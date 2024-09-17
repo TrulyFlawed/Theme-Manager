@@ -63,11 +63,7 @@ button {
 	display: flex;
 	gap: 5px;
 }
-button:focus-visible {
-	background-color: var(--primary-background);
-	color: var(--primary-text);
-	outline: 2px solid var(--primary-text);
-}
+button:focus-visible,
 button:hover {
 	background-color: var(--primary-background);
 	color: var(--primary-text);
@@ -103,10 +99,7 @@ button i {
 	border: 2px solid var(--primary-text);
 	background-color: #F5A9B8;
 }
-.main-theme-switches button:hover {
-	outline: 2px solid var(--primary-text);
-	outline-offset: 3px;
-}
+.main-theme-switches button:hover,
 .main-theme-switches button:focus-visible {
 	outline: 2px solid var(--primary-text);
 	outline-offset: 3px;
@@ -115,11 +108,7 @@ button i {
 	outline: 4px solid var(--primary-text);
 	outline-offset: 3px;
 }
-.main-theme-switches button.active-theme:hover {
-	outline: 6px solid var(--primary-text);
-	outline-offset: 0px;
-	border: none;
-}
+.main-theme-switches button.active-theme:hover,
 .main-theme-switches button.active-theme:focus-visible {
 	outline: 6px solid var(--primary-text);
 	outline-offset: 0px;
