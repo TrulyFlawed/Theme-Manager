@@ -65,9 +65,18 @@ button:hover {
 	outline: 2px solid var(--primary-text);
 }
 a {
-	text-decoration: underline;
+	text-decoration: 1px underline;
 	color: var(--primary-text);
 	transition: ease 0.15s;
+	outline: none;
+}
+a:hover {
+	text-decoration-thickness: 3px;
+}
+a:focus-visible {
+	text-decoration: none;
+	outline: 2px solid var(--primary-text);
+	outline-offset: 1px;
 }
 p {
 	margin: 5px;
