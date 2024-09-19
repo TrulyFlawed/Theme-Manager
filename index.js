@@ -38,4 +38,5 @@ function updateTheme() {
 	let activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${themes[activeIndex]}]`);
 	themeButtons.forEach(button => button.classList.remove('active-theme'));
 	activeThemeButton.classList.add("active-theme");
+	newIndex = undefined;
 }
