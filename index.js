@@ -2,7 +2,6 @@ const body = document.body;
 const themes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
 let activeIndex = themes.findIndex((theme) => body.classList.contains(theme));
 let newIndex;
-const themeButtonWrapper = document.querySelector(".main-theme-switches");
 const themeButtons = document.querySelectorAll(".theme-buttons");
 
 function nextTheme() {
@@ -28,16 +27,9 @@ function randomTheme() {
 }
 
 function selectTheme() {
-	themeButtonWrapper.addEventListener("click", (event) => {
-		if (event.target.tagName === "BUTTON") {
-			let selectedTheme = event.target.getAttribute("data-theme");
-			newIndex = themes.indexOf(selectedTheme);
-			updateTheme();
-		}
-		else {
-			return
-		}
-	})
+	let selectedTheme = event.target.getAttribute("data-theme");
+	newIndex = themes.indexOf(selectedTheme);
+	updateTheme();
 }
 
 function updateTheme() {
