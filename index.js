@@ -1,24 +1,24 @@
 const body = document.body;
-const themes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
-let activeIndex = themes.findIndex((theme) => body.classList.contains(theme));
-let newIndex;
+const siteThemes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
+let activeThemeIndex = siteThemes.findIndex((theme) => body.classList.contains(theme));
+let newThemeIndex;
 const themeButtons = document.querySelectorAll(".theme-buttons");
 
 function nextTheme() {
-	newIndex = activeIndex + 1;
-	newIndex = (newIndex + themes.length) % themes.length;
+	newThemeIndex = activeThemeIndex + 1;
+	newThemeIndex = (newThemeIndex + siteThemes.length) % siteThemes.length;
 	updateTheme();
 }
 
 function previousTheme() {
-	newIndex = activeIndex - 1;
-	newIndex = (newIndex + themes.length) % themes.length;
+	newThemeIndex = activeThemeIndex - 1;
+	newThemeIndex = (newThemeIndex + siteThemes.length) % siteThemes.length;
 	updateTheme();
 }
 
 function randomTheme() {
-	newIndex = Math.floor(Math.random() * themes.length);
-	if (newIndex !== activeIndex) {
+	newThemeIndex = Math.floor(Math.random() * siteThemes.length);
+	if (newThemeIndex !== activeThemeIndex) {
 		updateTheme();
 	}
 	else {
@@ -28,15 +28,15 @@ function randomTheme() {
 
 function selectTheme() {
 	let selectedTheme = event.target.getAttribute("data-theme");
-	newIndex = themes.indexOf(selectedTheme);
+	newThemeIndex = siteThemes.indexOf(selectedTheme);
 	updateTheme();
 }
 
 function updateTheme() {
-	body.classList.replace(themes[activeIndex], themes[newIndex]);
-	activeIndex = newIndex;
-	let activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${themes[activeIndex]}]`);
+	body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
+	activeThemeIndex = newThemeIndex;
+	let activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${siteThemes[activeThemeIndex]}]`);
 	themeButtons.forEach(button => button.classList.remove('active-theme'));
 	activeThemeButton.classList.add("active-theme");
-	newIndex = undefined;
+	newThemeIndex = undefined;
 }
