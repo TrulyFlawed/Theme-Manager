@@ -76,6 +76,7 @@ button svg {
 }
 a {
 	text-decoration: 1px underline;
+	text-underline-offset: 0.2em;
 	color: var(--primary-text);
 	fill: var(--primary-text);
 	transition: ease 0.15s;
