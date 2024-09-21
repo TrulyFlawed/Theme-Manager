@@ -98,8 +98,8 @@ p {
 	flex-wrap: wrap;
 }
 .main-theme-switches button {
-	height: 44px;
-	width: 44px;
+	height: 2.75rem;
+	width: 2.75rem;
 	border-radius: 50%;
 	border: 2px solid var(--primary-text);
 	background-color: #F5A9B8;
