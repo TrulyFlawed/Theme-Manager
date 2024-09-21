@@ -44,12 +44,13 @@ body {
 	height: 100vh;
 	flex-direction: column;
 	transition: ease 0.15s;
+	font-size: 1rem;
 }
 button {
 	background-color: var(--primary-text);
 	color: var(--secondary-text);
 	border: none;
-	font-size: 20px;
+	font-size: 1.25rem;
 	padding: 10px;
 	font-weight: 600;
 	margin-bottom: 5px;
@@ -63,6 +64,12 @@ button:hover {
 	background-color: var(--primary-background);
 	color: var(--primary-text);
 	outline: 2px solid var(--primary-text);
+}
+button i {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
 }
 a {
 	text-decoration: 1px underline;
@@ -81,12 +88,6 @@ a:focus-visible {
 p {
 	margin: 5px;
 	text-align: center;
-}
-button i {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 24px;
 }
 .main-theme-switches {
 	display: flex;
