@@ -49,7 +49,7 @@ body {
 button {
 	background-color: var(--primary-text);
 	color: var(--secondary-text);
-	border: none;
+	border: 0px solid transparent;
 	outline: 0px solid transparent;
 	font-size: 1.25rem;
 	padding: 10px;
@@ -76,7 +76,7 @@ a {
 	text-decoration: 1px underline;
 	color: var(--primary-text);
 	transition: ease 0.15s;
-	outline: none;
+	outline: 0px solid transparent;
 }
 a:hover {
 	text-decoration-thickness: 3px;
