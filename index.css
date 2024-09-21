@@ -117,7 +117,7 @@ p {
 .main-theme-switches button.active-theme:focus-visible {
 	outline: 6px solid var(--primary-text);
 	outline-offset: 0px;
-	border: none;
+	border: 0px solid transparent;
 }
 .main-theme-switches [data-theme="dark-theme"] {
 	background-color: #000;
