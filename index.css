@@ -102,7 +102,7 @@ p {
 	width: 2.75rem;
 	border-radius: 50%;
 	border: 2px solid var(--primary-text);
-	background-color: #F5A9B8;
+	background-color: var(--primary-background);
 }
 .main-theme-switches button:hover,
 .main-theme-switches button:focus-visible {
