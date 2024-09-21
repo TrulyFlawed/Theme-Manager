@@ -79,7 +79,9 @@ a {
 	outline: 0px solid transparent;
 }
 a:hover {
-	text-decoration-thickness: 3px;
+	text-decoration-thickness: 2px;
+	text-underline-offset: .4em;
+	font-weight: 700;
 }
 a:focus-visible {
 	text-decoration: none;
