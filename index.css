@@ -89,7 +89,6 @@ a {
 a:hover {
 	text-decoration-thickness: 2px;
 	text-underline-offset: .4em;
-	font-weight: 700;
 }
 a:focus-visible {
 	text-decoration: none;
@@ -99,6 +98,7 @@ a:focus-visible {
 a svg {
 	height: 1rem;
 	width: 1rem;
+	fill: currentColor;
 }
 p {
 	margin: 5px;
