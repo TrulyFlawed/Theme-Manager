@@ -32,7 +32,14 @@ function selectTheme() {
 function updateTheme(newThemeIndex) {
 	body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
 	activeThemeIndex = newThemeIndex;
-	const activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${siteThemes[activeThemeIndex]}]`);
+
+	updateThemeButtons();
+}
+
+function updateThemeButtons() {
 	themeButtons.forEach(button => button.classList.remove("active-theme"));
-	activeThemeButton.classList.add("active-theme");
+	const activeThemeButton = [...themeButtons].find(button => button.dataset.theme === siteThemes[activeThemeIndex]);
+	if (activeThemeButton) {
+		activeThemeButton.classList.add("active-theme");
+	}
 }
