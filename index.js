@@ -17,13 +17,11 @@ function previousTheme() {
 }
 
 function randomTheme() {
-	newThemeIndex = Math.floor(Math.random() * siteThemes.length);
-	if (newThemeIndex !== activeThemeIndex) {
-		updateTheme();
+	do {
+		newThemeIndex = Math.floor(Math.random() * siteThemes.length);
 	}
-	else {
-		return randomTheme();
-	}
+	while (newThemeIndex === activeThemeIndex);
+	updateTheme();
 }
 
 function selectTheme() {
