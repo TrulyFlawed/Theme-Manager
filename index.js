@@ -4,13 +4,17 @@ let activeThemeIndex = siteThemes.findIndex((theme) => body.classList.contains(t
 let newThemeIndex;
 const themeButtons = document.querySelectorAll(".theme-buttons");
 
+function arrayIndexWrapHandler(indexValue, arrayLength) {
+	return (indexValue + arrayLength) % arrayLength;
+}
+
 function nextTheme() {
-	newThemeIndex = ((activeThemeIndex + 1) + siteThemes.length) % siteThemes.length;
-	updateTheme();
+	newThemeIndex = arrayIndexWrapHandler((activeThemeIndex + 1), siteThemes.length);
+	updateTheme(newThemeIndex);
 }
 
 function previousTheme() {
-	newThemeIndex = ((activeThemeIndex - 1) + siteThemes.length) % siteThemes.length;
+	newThemeIndex = arrayIndexWrapHandler((activeThemeIndex - 1), siteThemes.length);
 	updateTheme();
 }
 
