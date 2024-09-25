@@ -32,7 +32,7 @@ function updateTheme() {
 	body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
 	activeThemeIndex = newThemeIndex;
 	const activeThemeButton = document.querySelector(`.theme-buttons[data-theme=${siteThemes[activeThemeIndex]}]`);
-	themeButtons.forEach(button => button.classList.remove('active-theme'));
+	themeButtons.forEach(button => button.classList.remove("active-theme"));
 	activeThemeButton.classList.add("active-theme");
 	newThemeIndex = undefined;
 }
