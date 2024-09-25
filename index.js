@@ -25,7 +25,7 @@ function randomTheme() {
 }
 
 function selectTheme() {
-	let selectedTheme = event.target.getAttribute("data-theme");
+	const selectedTheme = event.target.getAttribute("data-theme");
 	newThemeIndex = siteThemes.indexOf(selectedTheme);
 	updateTheme();
 }
