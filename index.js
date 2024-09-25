@@ -29,10 +29,14 @@ function selectTheme() {
 }
 
 function updateTheme(newThemeIndex) {
-	document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
-	activeThemeIndex = newThemeIndex;
+	if (newThemeIndex === activeThemeIndex) { return; }
+	else {
+		console.log("Theme updated.");
+		document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
+		activeThemeIndex = newThemeIndex;
 
-	updateThemeButtons();
+		updateThemeButtons();
+	}
 }
 
 function updateThemeButtons() {
