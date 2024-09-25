@@ -1,6 +1,5 @@
-const body = document.body;
 const siteThemes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
-let activeThemeIndex = siteThemes.findIndex((theme) => body.classList.contains(theme));
+let activeThemeIndex = siteThemes.findIndex((theme) => document.body.classList.contains(theme));
 const themeButtons = document.querySelectorAll(".theme-buttons");
 
 function arrayIndexWrapHandler(indexValue, arrayLength) {
@@ -30,7 +29,7 @@ function selectTheme() {
 }
 
 function updateTheme(newThemeIndex) {
-	body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
+	document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
 	activeThemeIndex = newThemeIndex;
 
 	updateThemeButtons();
