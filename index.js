@@ -16,6 +16,7 @@ function previousTheme() {
 }
 
 function randomTheme() {
+	let randomThemeIndex;
 	do {
 		randomThemeIndex = Math.floor(Math.random() * siteThemes.length);
 	}
