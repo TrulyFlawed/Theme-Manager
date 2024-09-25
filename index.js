@@ -5,14 +5,12 @@ let newThemeIndex;
 const themeButtons = document.querySelectorAll(".theme-buttons");
 
 function nextTheme() {
-	newThemeIndex = activeThemeIndex + 1;
-	newThemeIndex = (newThemeIndex + siteThemes.length) % siteThemes.length;
+	newThemeIndex = ((activeThemeIndex + 1) + siteThemes.length) % siteThemes.length;
 	updateTheme();
 }
 
 function previousTheme() {
-	newThemeIndex = activeThemeIndex - 1;
-	newThemeIndex = (newThemeIndex + siteThemes.length) % siteThemes.length;
+	newThemeIndex = ((activeThemeIndex - 1) + siteThemes.length) % siteThemes.length;
 	updateTheme();
 }
 
