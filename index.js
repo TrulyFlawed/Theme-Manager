@@ -55,4 +55,4 @@ const ThemeManager = (function() {
 	document.querySelector("#previous-theme-button").addEventListener("click", previousTheme);
 	document.querySelector("#random-theme-button").addEventListener("click", randomTheme);
 	document.querySelector("#next-theme-button").addEventListener("click", nextTheme);
-})()
+})();
