@@ -1,6 +1,7 @@
 const siteThemes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
 let activeThemeIndex = siteThemes.findIndex((theme) => document.body.classList.contains(theme));
 const themeButtons = document.querySelectorAll(".theme-buttons");
+const themeButtonWrapper = document.querySelector(".main-theme-switches");
 
 function arrayIndexWrapHandler(indexValue, arrayLength) {
 	return (indexValue + arrayLength) % arrayLength;
@@ -23,15 +24,17 @@ function randomTheme() {
 	updateTheme(randomThemeIndex);
 }
 
-function selectTheme() {
-	const selectedTheme = event.target.getAttribute("data-theme");
-	updateTheme(siteThemes.indexOf(selectedTheme));
+function selectTheme(event) {
+	const selectedThemeButton = event.target.closest(".theme-buttons");
+	if (selectedThemeButton) {
+		const selectedTheme = selectedThemeButton.dataset.theme;
+		updateTheme(siteThemes.indexOf(selectedTheme));
+	}
 }
 
 function updateTheme(newThemeIndex) {
 	if (newThemeIndex === activeThemeIndex) { return; }
 	else {
-		console.log("Theme updated.");
 		document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
 		activeThemeIndex = newThemeIndex;
 
@@ -46,3 +49,5 @@ function updateThemeButtons() {
 		activeThemeButton.classList.add("active-theme");
 	}
 }
+
+themeButtonWrapper.addEventListener("click", selectTheme);
