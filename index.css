@@ -46,12 +46,13 @@ body {
 	background-color: var(--primary-background);
 	color: var(--primary-text);
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	height: 100vh;
 	flex-direction: column;
 	transition: ease 0.15s;
 	font-size: 1rem;
+}
+.website-container {
+	margin: auto;
 }
 button {
 	background-color: var(--primary-text);
@@ -125,6 +126,7 @@ p {
 	border-radius: 50%;
 	border: 2px solid var(--primary-text);
 	background-color: var(--primary-background);
+	margin-top: 13px;
 }
 .main-theme-switches button:hover,
 .main-theme-switches button:focus-visible {
