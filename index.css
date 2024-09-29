@@ -31,9 +31,9 @@
 *,
 *::before,
 *::after {
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
 	font-family: "Inter", sans-serif;
 }
 
@@ -47,13 +47,17 @@
 }
 
 body {
-	background-color: var(--primary-background);
-	color: var(--primary-text);
 	display: flex;
-	height: 100vh;
 	flex-direction: column;
-	transition: ease 0.15s;
+
+	height: 100vh;
+
 	font-size: 1rem;
+	color: var(--primary-text);
+
+	background-color: var(--primary-background);
+
+	transition: ease 0.15s;
 }
 
 .website-container {
@@ -61,47 +65,56 @@ body {
 }
 
 button {
-	background-color: var(--primary-text);
-	color: var(--secondary-text);
-	fill: var(--secondary-text);
-	border: 0px solid transparent;
-	outline: 0px solid transparent;
-	font-size: 1.25rem;
-	padding: 10px;
-	font-weight: 600;
-	margin-bottom: 5px;
-	border-radius: 11px;
-	transition: ease 0.15s;
 	display: inline-flex;
+	gap: 5px;
 	align-items: center;
 	justify-content: center;
-	gap: 5px;
+
+	margin-bottom: 5px;
+	padding: 10px;
+
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--secondary-text);
+
+	background-color: var(--primary-text);
+	border: 0px solid transparent;
+	border-radius: 11px;
+	outline: 0px solid transparent;
+
+	fill: var(--secondary-text);
+
+	transition: ease 0.15s;
 }
 
 button:focus-visible,
 button:hover {
-	background-color: var(--primary-background);
 	color: var(--primary-text);
-	fill: var(--primary-text);
+	background-color: var(--primary-background);
 	outline: 2px solid var(--primary-text);
+	fill: var(--primary-text);
 }
 
 button svg {
-	height: 1.5rem;
 	width: 1.5rem;
+	height: 1.5rem;
 }
 
 a {
-	text-decoration: 1px underline;
-	text-underline-offset: 0.2em;
-	color: var(--primary-text);
-	fill: var(--primary-text);
-	transition: ease 0.15s;
-	outline: 0px solid transparent;
 	display: inline-flex;
+	gap: 0.1rem;
 	align-items: center;
 	justify-content: center;
-	gap: 0.1rem;
+
+	color: var(--primary-text);
+	text-decoration: 1px underline;
+	text-underline-offset: 0.2em;
+
+	outline: 0px solid transparent;
+
+	fill: var(--primary-text);
+
+	transition: ease 0.15s;
 }
 
 a:hover {
@@ -116,8 +129,8 @@ a:focus-visible {
 }
 
 a svg {
-	height: 1rem;
 	width: 1rem;
+	height: 1rem;
 	fill: currentColor;
 }
 
@@ -128,20 +141,22 @@ p {
 
 .main-theme-switches {
 	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
 	align-items: center;
 	justify-content: center;
-	gap: 15px;
+
 	margin-bottom: 10px;
-	flex-wrap: wrap;
 }
 
 .main-theme-switches button {
-	height: 2.75rem;
 	width: 2.75rem;
-	border-radius: 50%;
-	border: 2px solid var(--primary-text);
-	background-color: var(--primary-background);
+	height: 2.75rem;
 	margin-top: 13px;
+
+	background-color: var(--primary-background);
+	border: 2px solid var(--primary-text);
+	border-radius: 50%;
 }
 
 .main-theme-switches button:hover,
@@ -157,9 +172,9 @@ p {
 
 .main-theme-switches button.active-theme:hover,
 .main-theme-switches button.active-theme:focus-visible {
+	border: 0px solid transparent;
 	outline: 6px solid var(--primary-text);
 	outline-offset: 0px;
-	border: 0px solid transparent;
 }
 
 .main-theme-switches [data-theme="dark-theme"] {
@@ -180,10 +195,10 @@ p {
 
 .misc-theme-switches {
 	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
 	align-items: center;
 	justify-content: center;
-	gap: 5px;
-	flex-wrap: wrap;
 }
 
 @media (max-width: 300px) {
