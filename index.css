@@ -3,21 +3,25 @@
 	--primary-background: #000;
 	--secondary-text: #000;
 }
+
 :root .dark-theme {
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
 }
+
 :root .light-theme {
 	--primary-text: #000;
 	--primary-background: #fff;
 	--secondary-text: #fff;
 }
+
 :root .pink-theme {
 	--primary-text: #000;
 	--primary-background: #F5A9B8;
 	--secondary-text: #fff;
 }
+
 :root .blue-theme {
 	--primary-text: #000;
 	--primary-background: #5BCEFA;
@@ -51,9 +55,11 @@ body {
 	transition: ease 0.15s;
 	font-size: 1rem;
 }
+
 .website-container {
 	margin: auto;
 }
+
 button {
 	background-color: var(--primary-text);
 	color: var(--secondary-text);
@@ -71,6 +77,7 @@ button {
 	justify-content: center;
 	gap: 5px;
 }
+
 button:focus-visible,
 button:hover {
 	background-color: var(--primary-background);
@@ -78,10 +85,12 @@ button:hover {
 	fill: var(--primary-text);
 	outline: 2px solid var(--primary-text);
 }
+
 button svg {
 	height: 1.5rem;
 	width: 1.5rem;
 }
+
 a {
 	text-decoration: 1px underline;
 	text-underline-offset: 0.2em;
@@ -94,24 +103,29 @@ a {
 	justify-content: center;
 	gap: 0.1rem;
 }
+
 a:hover {
 	text-decoration-thickness: 2px;
 	text-underline-offset: .4em;
 }
+
 a:focus-visible {
 	text-decoration: none;
 	outline: 2px solid var(--primary-text);
 	outline-offset: 1px;
 }
+
 a svg {
 	height: 1rem;
 	width: 1rem;
 	fill: currentColor;
 }
+
 p {
 	margin: 5px;
 	text-align: center;
 }
+
 .main-theme-switches {
 	display: flex;
 	align-items: center;
@@ -120,6 +134,7 @@ p {
 	margin-bottom: 10px;
 	flex-wrap: wrap;
 }
+
 .main-theme-switches button {
 	height: 2.75rem;
 	width: 2.75rem;
@@ -128,33 +143,41 @@ p {
 	background-color: var(--primary-background);
 	margin-top: 13px;
 }
+
 .main-theme-switches button:hover,
 .main-theme-switches button:focus-visible {
 	outline: 2px solid var(--primary-text);
 	outline-offset: 3px;
 }
+
 .main-theme-switches button.active-theme {
 	outline: 4px solid var(--primary-text);
 	outline-offset: 3px;
 }
+
 .main-theme-switches button.active-theme:hover,
 .main-theme-switches button.active-theme:focus-visible {
 	outline: 6px solid var(--primary-text);
 	outline-offset: 0px;
 	border: 0px solid transparent;
 }
+
 .main-theme-switches [data-theme="dark-theme"] {
 	background-color: #000;
 }
+
 .main-theme-switches [data-theme="light-theme"] {
 	background-color: #fff;
 }
+
 .main-theme-switches [data-theme="pink-theme"] {
 	background-color: #F5A9B8;
 }
+
 .main-theme-switches [data-theme="blue-theme"] {
 	background-color: #5BCEFA;
 }
+
 .misc-theme-switches {
 	display: flex;
 	align-items: center;
@@ -162,6 +185,7 @@ p {
 	gap: 5px;
 	flex-wrap: wrap;
 }
+
 @media (max-width: 300px) {
 	.misc-theme-switches span {
 		display: none;
