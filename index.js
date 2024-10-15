@@ -67,7 +67,7 @@ const ThemeManager = (function() {
         themeButtons.forEach(button => button.classList.remove("active-theme"));
         const activeThemeButton = [...themeButtons].find(button => button.dataset.theme === siteThemes[activeThemeIndex]);
         if (activeThemeButton) {
-            activeThemeButton.classList.add("active-theme");
+            activeThemeButton.classList.add(options.activeThemeClass);
         }
     }
 
@@ -79,10 +79,11 @@ const ThemeManager = (function() {
 
 // Usage example
 ThemeManager.initializeThemeManager({
-    themes: ["dark-theme", "light-theme", "pink-theme", "blue-theme"], // Custom themes
-    themeButtonSelector: ".theme-buttons", // Custom button selector
-    buttonWrapperSelector: ".main-theme-switches", // Custom button wrapper selector
-    previousButtonSelector: "#previous-theme-button", // Custom previous button selector
-    randomButtonSelector: "#random-theme-button", // Custom random button selector
-    nextButtonSelector: "#next-theme-button" // Custom next button selector
+    themes: ["dark-theme", "light-theme", "pink-theme", "blue-theme"], // Configuration for the website's themes.
+    themeButtonSelector: ".theme-buttons", // Configuration for the theme buttons selector.
+    buttonWrapperSelector: ".main-theme-switches", // Configuration for the theme button container selector.
+    previousButtonSelector: "#previous-theme-button", // Configuration for the previous theme button selector.
+    randomButtonSelector: "#random-theme-button", // Configuration for the random theme button selector.
+    nextButtonSelector: "#next-theme-button", // Configuration for the next theme button selector.
+	activeThemeClass: "active-theme" // Configuration for the active theme classes' name.
 });
