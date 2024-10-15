@@ -1,13 +1,16 @@
 const ThemeManager = (function() {
+	// Variables.
 	const siteThemes = ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
 	let activeThemeIndex = siteThemes.findIndex((theme) => document.body.classList.contains(theme));
 	const themeButtons = document.querySelectorAll(".theme-buttons");
 	const themeButtonWrapper = document.querySelector(".main-theme-switches");
 	
+	// Helper functions.
 	function arrayIndexWrapHandler(indexValue, arrayLength) {
 		return (indexValue + arrayLength) % arrayLength;
 	}
 	
+	// Theme selection functions.
 	function nextTheme() {
 		updateTheme(arrayIndexWrapHandler((activeThemeIndex + 1), siteThemes.length));
 	}
@@ -33,6 +36,7 @@ const ThemeManager = (function() {
 		}
 	}
 	
+	// DOM update functions.
 	function updateTheme(newThemeIndex) {
 		if (newThemeIndex === activeThemeIndex) { return; }
 		else {
@@ -51,6 +55,7 @@ const ThemeManager = (function() {
 		}
 	}
 	
+	// Event listeners.
 	themeButtonWrapper.addEventListener("click", selectTheme);
 	document.querySelector("#previous-theme-button").addEventListener("click", previousTheme);
 	document.querySelector("#random-theme-button").addEventListener("click", randomTheme);
