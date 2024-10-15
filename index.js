@@ -80,7 +80,7 @@ const ThemeManager = (function() {
     }
 
     function updateThemeButtons() {
-        themeButtons.forEach(button => button.classList.remove("active-theme"));
+        themeButtons.forEach(button => button.classList.remove(options.activeThemeClass));
         const activeThemeButton = [...themeButtons].find(button => button.dataset.theme === siteThemes[activeThemeIndex]);
         if (activeThemeButton) {
             activeThemeButton.classList.add(options.activeThemeClass);
