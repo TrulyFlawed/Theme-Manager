@@ -9,7 +9,7 @@ const ThemeManager = (function() {
     // Initialization functions
     function initializeThemeManager(initOptions) {
         options = initOptions; // Save options for use in other functions
-        siteThemes = options.themes || ["dark-theme", "light-theme", "pink-theme", "blue-theme"];
+        siteThemes = options.themes || ["dark-theme", "light-theme"];
         activeThemeIndex = siteThemes.findIndex(theme => document.body.classList.contains(theme));
         themeButtons = document.querySelectorAll(options.themeButtonSelector || ".theme-buttons");
         themeButtonWrapper = document.querySelector(options.buttonWrapperSelector || ".main-theme-switches");
@@ -18,10 +18,22 @@ const ThemeManager = (function() {
     }
 
     function setupEventListeners() {
-        themeButtonWrapper.addEventListener("click", selectButtonTheme);
-        document.querySelector(options.previousButtonSelector || "#previous-theme-button").addEventListener("click", selectPreviousTheme);
-        document.querySelector(options.randomButtonSelector || "#random-theme-button").addEventListener("click", selectRandomTheme);
-        document.querySelector(options.nextButtonSelector || "#next-theme-button").addEventListener("click", selectNextTheme);
+        if (themeButtonWrapper) {
+            themeButtonWrapper.addEventListener("click", selectButtonTheme);
+        }
+
+        const buttonsConfig = [
+            { selector: options.previousButtonSelector || "#previous-theme-button", handler: selectPreviousTheme },
+            { selector: options.randomButtonSelector || "#random-theme-button", handler: selectRandomTheme },
+            { selector: options.nextButtonSelector || "#next-theme-button", handler: selectNextTheme },
+        ];
+
+        buttonsConfig.forEach(({ selector, handler }) => {
+            const button = document.querySelector(selector);
+            if (button) {
+                button.addEventListener("click", handler);
+            }
+        });
     }
 
     // Helper function
