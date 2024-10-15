@@ -11,7 +11,7 @@ const ThemeManager = (function() {
 	}
 	
 	// Theme selection functions.
-	function selectTheme(event) {
+	function selectButtonTheme(event) {
 		const selectedThemeButton = event.target.closest(".theme-buttons");
 		if (selectedThemeButton) {
 			const selectedTheme = selectedThemeButton.dataset.theme;
@@ -19,15 +19,15 @@ const ThemeManager = (function() {
 		}
 	}
 
-	function nextTheme() {
+	function selectNextTheme() {
 		updateTheme(arrayIndexWrapHandler((activeThemeIndex + 1), siteThemes.length));
 	}
 	
-	function previousTheme() {
+	function selectPreviousTheme() {
 		updateTheme(arrayIndexWrapHandler((activeThemeIndex - 1), siteThemes.length));
 	}
 	
-	function randomTheme() {
+	function selectRandomTheme() {
 		let randomThemeIndex;
 		do {
 			randomThemeIndex = Math.floor(Math.random() * siteThemes.length);
@@ -56,8 +56,8 @@ const ThemeManager = (function() {
 	}
 	
 	// Event listeners.
-	themeButtonWrapper.addEventListener("click", selectTheme);
-	document.querySelector("#previous-theme-button").addEventListener("click", previousTheme);
-	document.querySelector("#random-theme-button").addEventListener("click", randomTheme);
-	document.querySelector("#next-theme-button").addEventListener("click", nextTheme);
+	themeButtonWrapper.addEventListener("click", selectButtonTheme);
+	document.querySelector("#previous-theme-button").addEventListener("click", selectPreviousTheme);
+	document.querySelector("#random-theme-button").addEventListener("click", selectRandomTheme);
+	document.querySelector("#next-theme-button").addEventListener("click", selectNextTheme);
 })();
