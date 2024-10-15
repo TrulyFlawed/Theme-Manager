@@ -29,14 +29,18 @@ const ThemeManager = (function() {
         ];
 
         buttonsConfig.forEach(({ selector, handler }) => {
-            const button = document.querySelector(selector);
-            if (button) {
-                button.addEventListener("click", handler);
-            }
+            setupButtonEvents(selector, handler);
         });
     }
 
-    // Helper function
+    // Helper functions
+	function setupButtonEvents(buttonSelector, buttonEventHandler) {
+		const button = document.querySelector(buttonSelector);
+        if (button) {
+            button.addEventListener("click", buttonEventHandler);
+        }
+	}
+	
     function arrayIndexWrapHandler(indexValue, arrayLength) {
         return (indexValue + arrayLength) % arrayLength;
     }
