@@ -109,7 +109,7 @@ const ThemeManager = (function() {
 	function updateTheme(newThemeIndex) {
 		if (newThemeIndex !== activeThemeIndex) {
 			// If there isn't a theme found on the document body we add a new theme class to the body element.
-			if (!document.body.classList.contains(siteThemes[activeThemeIndex])) {
+			if (activeThemeIndex === -1) {
 				addThemeClass(newThemeIndex);
 			} else { // Otherwise we just replace one theme class with another.
 				replaceThemeClass(newThemeIndex);
