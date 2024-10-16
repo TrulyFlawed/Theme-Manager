@@ -4,17 +4,34 @@ const ThemeManager = (function() {
     let activeThemeIndex = -1;
     let themeButtons = [];
     let themeButtonWrapper = null;
-    let options = {}; // Store options at a higher scope
+    let options = {};
 
     // Initialization functions
-    function initializeThemeManager(initOptions) {
-        options = initOptions; // Save options for use in other functions
-        siteThemes = options.themes || ["dark-theme", "light-theme"];
+    function initializeThemeManager(configOverrides) {
+        options = {
+			// Default configuration settings.
+            themes: ["dark-theme", "light-theme"],
+            themeButtonSelector: ".theme-buttons",
+            buttonWrapperSelector: ".main-theme-switches",
+            previousButtonSelector: "#previous-theme-button",
+            randomButtonSelector: "#random-theme-button",
+            nextButtonSelector: "#next-theme-button",
+            activeThemeClass: "active-theme",
+			// User-specified override configurations.
+            ...configOverrides
+        };
+
+        siteThemes = options.themes;
         activeThemeIndex = siteThemes.findIndex(theme => document.body.classList.contains(theme));
-        themeButtons = document.querySelectorAll(options.themeButtonSelector || ".theme-buttons");
-        themeButtonWrapper = document.querySelector(options.buttonWrapperSelector || ".main-theme-switches");
+        themeButtons = document.querySelectorAll(options.themeButtonSelector);
+        themeButtonWrapper = document.querySelector(options.buttonWrapperSelector);
 
         setupEventListeners();
+
+		// Always initialize our site to load the first theme in the array.
+		// I plan to make this load whichever theme the user last selected
+		// or to set it automatically based on device/browser preferences.
+		updateTheme(0);
     }
 
     function setupEventListeners() {
@@ -23,9 +40,9 @@ const ThemeManager = (function() {
         }
 
         const buttonsConfig = [
-            { selector: options.previousButtonSelector || "#previous-theme-button", handler: selectPreviousTheme },
-            { selector: options.randomButtonSelector || "#random-theme-button", handler: selectRandomTheme },
-            { selector: options.nextButtonSelector || "#next-theme-button", handler: selectNextTheme },
+            { selector: options.previousButtonSelector, handler: selectPreviousTheme },
+            { selector: options.randomButtonSelector, handler: selectRandomTheme },
+            { selector: options.nextButtonSelector, handler: selectNextTheme },
         ];
 
         buttonsConfig.forEach(({ selector, handler }) => {
@@ -50,6 +67,7 @@ const ThemeManager = (function() {
 		const selectedThemeButton = event.target.closest(options.themeButtonSelector);
 		if (selectedThemeButton) {
 			const selectedTheme = selectedThemeButton.dataset.theme;
+			if (!siteThemes.includes(selectedTheme)) { return; } // Check to make sure button's theme actually exists in our array.
 			updateTheme(siteThemes.indexOf(selectedTheme));
 		}
 	}
@@ -73,6 +91,10 @@ const ThemeManager = (function() {
     // DOM update functions
     function updateTheme(newThemeIndex) {
         if (newThemeIndex === activeThemeIndex) { return; }
+		// If the HTML doesn't already have a theme class we add a new one.
+		if (!document.body.classList.contains(activeThemeIndex)) {
+			document.body.classList.add(siteThemes[activeThemeIndex]);
+		}
         document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
         activeThemeIndex = newThemeIndex;
 
@@ -95,11 +117,11 @@ const ThemeManager = (function() {
 
 // Usage example
 ThemeManager.initializeThemeManager({
-    themes: ["dark-theme", "light-theme", "pink-theme", "blue-theme"], // Configuration for the website's themes.
-    themeButtonSelector: ".theme-buttons", // Configuration for the theme buttons selector.
-    buttonWrapperSelector: ".main-theme-switches", // Configuration for the theme button container selector.
-    previousButtonSelector: "#previous-theme-button", // Configuration for the previous theme button selector.
-    randomButtonSelector: "#random-theme-button", // Configuration for the random theme button selector.
-    nextButtonSelector: "#next-theme-button", // Configuration for the next theme button selector.
-	activeThemeClass: "active-theme" // Configuration for the active theme classes' name.
+    themes: ["dark-theme", "light-theme", "pink-theme", "blue-theme"],
+    themeButtonSelector: ".theme-buttons",
+    buttonWrapperSelector: ".main-theme-switches",
+    previousButtonSelector: "#previous-theme-button",
+    randomButtonSelector: "#random-theme-button",
+    nextButtonSelector: "#next-theme-button",
+	activeThemeClass: "active-theme"
 });
