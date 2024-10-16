@@ -7,9 +7,8 @@ const ThemeManager = (function() {
 	let options = {};
 	
 	// Initialization functions
-	function initializeThemeManager(configOverrides) {
-		options = {
-			// Default configuration settings.
+	function getConfigurationDefaults() {
+		return {
 			themes: ["dark-theme", "light-theme"],
 			themeButtonSelector: ".theme-buttons",
 			buttonWrapperSelector: ".main-theme-switches",
@@ -17,10 +16,11 @@ const ThemeManager = (function() {
 			randomButtonSelector: "#random-theme-button",
 			nextButtonSelector: "#next-theme-button",
 			activeThemeClass: "active-theme",
-			// User-specified override configurations.
-			// They will override our default properties as needed.
-			...configOverrides
-		};
+		}
+	}
+	
+	function initializeThemeManager(configurationOverrides) {
+		options = { ...getConfigurationDefaults(), ...configurationOverrides };
 		
 		siteThemes = options.themes;
 		activeThemeIndex = siteThemes.findIndex(theme => document.body.classList.contains(theme));
