@@ -89,16 +89,26 @@ const ThemeManager = (function() {
 	}
 
 	// DOM update functions
-	function updateTheme(newThemeIndex) {
-		if (newThemeIndex === activeThemeIndex) { return; }
-		// If the HTML doesn't already have a theme class we add a new one.
-		if (!document.body.classList.contains(activeThemeIndex)) {
-			document.body.classList.add(siteThemes[activeThemeIndex]);
-		}
-		document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
-		activeThemeIndex = newThemeIndex;
+	function addThemeClass(newThemeIndex) {
+		document.body.classList.add(siteThemes[newThemeIndex]);
+	}
 
-		updateThemeButtons();
+	function replaceThemeClass(newThemeIndex) {
+		document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
+	}
+
+	function updateTheme(newThemeIndex) {
+		if (newThemeIndex !== activeThemeIndex) {
+			if (!document.body.classList.contains(siteThemes[activeThemeIndex])) {
+				addThemeClass(newThemeIndex);
+			}
+			else {
+				replaceThemeClass(newThemeIndex);
+			}
+			activeThemeIndex = newThemeIndex;
+			updateThemeButtons();
+		}
+		else { return; }
 	}
 
 	function updateThemeButtons() {
