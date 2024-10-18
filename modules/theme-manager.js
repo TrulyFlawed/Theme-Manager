@@ -100,7 +100,7 @@ const ThemeManager = (function() {
 			themeButtonWrapper.addEventListener("click", selectButtonTheme);
 		}
 		
-		// TODO (#1): Use more configurable button event setup.
+		// TODO (#2): Use more configurable button event setup.
 		const buttonsConfig = [
 			{ selector: options.previousButtonSelector, handler: selectPreviousTheme },
 			{ selector: options.randomButtonSelector, handler: selectRandomTheme },
