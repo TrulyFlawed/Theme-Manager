@@ -42,10 +42,12 @@ const ThemeManager = (function() {
 	 */
 
 	/**
-	 * Retrieves our default theme configurations.
+	 * Retrieves the default theme configurations. These are hard-coded, but
+	 * I need to come up with better default names. For now they will remain
+	 * as the website's used names.
 	 *
 	 * @returns {ThemeManagerConfig} Default configuration object with it's
-	 * themes and element selectors
+	 * themes and element selectors.
 	 */
 	function getConfigurationDefaults() {
 		return {
@@ -61,6 +63,8 @@ const ThemeManager = (function() {
 	
 	/**
 	 * Initializes the ThemeManager with the provided configuration.
+	 * 
+	 * This function will always load the first theme in the array before ending initialization.
 	 *
 	 * @param {ThemeManagerConfig} configurationOverrides - User-specified configuration options to override defaults.
 	 * @returns {void}
@@ -86,7 +90,8 @@ const ThemeManager = (function() {
 	}
 	
 	/**
-	 * Sets up event listeners for theme buttons.
+	 * Sets up the necessary event listeners for our theming using the
+	 * given configurations.
 	 *
 	 * @returns {void}
 	 */
@@ -111,7 +116,10 @@ const ThemeManager = (function() {
 	// ==============================
 
 	/**
-	 * Configures an event listener for a specific button.
+	 * Configures event listeners for specific buttons.
+	 * 
+	 * It is called from the `setupEventListeners` function, which runs the `forEach` method
+	 * on each of the specified buttons that wasn't in a button wrapper.
 	 *
 	 * @param {string} buttonSelector - The CSS selector for the button.
 	 * @param {Function} buttonEventHandler - The function to call when the button is clicked.
@@ -140,7 +148,7 @@ const ThemeManager = (function() {
 	// ==============================
 	
 	/**
-	 * Selects the theme based on the button clicked.
+	 * Selects the theme based on the specific clicked button's data-theme attribute.
 	 *
 	 * @param {MouseEvent} event - The click event triggered by the theme button.
 	 * @returns {void}
@@ -173,7 +181,7 @@ const ThemeManager = (function() {
 	}
 	
 	/**
-	 * Selects a random theme from the available themes.
+	 * Selects a random theme from the available themes (not including the current theme).
 	 *
 	 * @returns {void}
 	 */
@@ -191,6 +199,9 @@ const ThemeManager = (function() {
 
 	/**
 	 * Adds a new theme class to the document body.
+	 * 
+	 * Intended to be used only when the document body does not already have
+	 * an available theme class.
 	 *
 	 * @param {number} newThemeIndex - The index of the new theme to add.
 	 * @returns {void}
@@ -201,6 +212,9 @@ const ThemeManager = (function() {
 	
 	/**
 	 * Replaces the current theme class with a new one.
+	 * 
+	 * Intended as the default use for changing the theme; should only be run when
+	 * a theme class is available on the document body to be replaced.
 	 *
 	 * @param {number} newThemeIndex - The index of the new theme to replace the current theme.
 	 * @returns {void}
