@@ -9,12 +9,24 @@
  * @module ThemeManager
  * @example
  *	ThemeManager.initializeThemeManager({
- *		themes: ["dark-theme", "light-theme", "high-contrast-theme"],
- *		themeButtonSelector: ".theme-buttons",
- *		buttonWrapperSelector: ".main-theme-switches",
+ *		themes: ["dark-theme", "light-theme", "pink-theme", "blue-theme"],
+ *		activeThemeClass: "active-theme",
+ *		buttonWrappers: [
+ *			{
+ *				wrapperSelector: ".button-wrapper-class",
+ *				intendedButtonSelectors: ".buttons-that-get-event-assigned",
+ *				eventHandler: "selectButtonTheme"
+ *			}
+ *		],
+ *		buttons: [
+ *			{
+ *				selector: "#button-id",
+ *				eventHandler: "selectNextTheme"
+ *			}
+ *		]
  *	});
  */
-const ThemeManager = (function() {
+ const ThemeManager = (function() {
 	
 	// ==============================
 	// Private Variables
@@ -22,71 +34,83 @@ const ThemeManager = (function() {
 	
 	let siteThemes = [];
 	let activeThemeIndex = -1;
-	let themeButtons = [];
-	let themeButtonWrapper = null;
-	let options = {};
+	let configuration = {};
 	
 	// ==============================
-	// Initialization Functions
+	// Initialization
 	// ==============================
-
+	
 	/**
 	 * @typedef {Object} ThemeManagerConfig
 	 * @property {string[]} themes - An array of available theme class names.
-	 * @property {string} themeButtonSelector - A CSS selector for the theme buttons.
-	 * @property {string} buttonWrapperSelector - A CSS selector for the wrapper containing the theme buttons.
 	 * @property {string} activeThemeClass - Class name for the active theme button.
-	 * @property {string} [previousButtonSelector] - (Optional) Selector for the previous theme button.
-	 * @property {string} [randomButtonSelector] - (Optional) Selector for the random theme button.
-	 * @property {string} [nextButtonSelector] - (Optional) Selector for the next theme button.
+	 * @property {Object[]} buttonWrappers - An array of configurations for button wrappers.
+	 * @property {string} buttonWrappers[].wrapperSelector - A CSS selector for the button wrapper.
+	 * @property {string} buttonWrappers[].intendedButtonSelectors - A CSS selector for the buttons within the wrapper.
+	 * @property {string} buttonWrappers[].eventHandler - The name of the event handler function to call when a button is clicked.
+	 * @property {Object[]} buttons - An array of configurations for standalone buttons.
+	 * @property {string} buttons[].selector - A CSS selector for the standalone button.
+	 * @property {string} buttons[].eventHandler - The name of the event handler function to call when the button is clicked.
 	 */
-
+	
 	/**
-	 * Retrieves the default theme configurations. These are hard-coded, but
+	 * Retrieves the default theme configurations.
+	 * 
 	 * I need to come up with better default names. For now they will remain
 	 * as the website's used names.
 	 *
 	 * @returns {ThemeManagerConfig} Default configuration object with it's
 	 * themes and element selectors.
 	 */
-	function getConfigurationDefaults() {
+	function getConfigurationDefaults() { // TODO: Improve default configurations.
 		return {
 			themes: ["dark-theme", "light-theme"],
-			themeButtonSelector: ".theme-buttons",
-			buttonWrapperSelector: ".main-theme-switches",
 			activeThemeClass: "active-theme",
-			previousButtonSelector: "#previous-theme-button",
-			randomButtonSelector: "#random-theme-button",
-			nextButtonSelector: "#next-theme-button",
+			buttonWrappers: [],
+			buttons: [],
 		}
 	}
 	
 	/**
+	 * @typedef {Object} EventHandlersMap
+	 * @property {Function} selectButtonTheme - Handles the theme selection based on the clicked button.
+	 * @property {Function} selectNextTheme - Handles the action of selecting the next theme in the array.
+	 * @property {Function} selectPreviousTheme - Handles the action of selecting the previous theme in the array.
+	 * @property {Function} selectRandomTheme - Handles the action of selecting a random theme from the available themes.
+	 */
+	
+	/**
+	 * A collection of the available internal methods we want to
+	 * "expose" and apply to our buttons & wrappers.
+	 *
+	 * @type {EventHandlersMap}
+	 */
+	const eventHandlersMap = {
+		selectButtonTheme,
+		selectNextTheme,
+		selectPreviousTheme,
+		selectRandomTheme,
+	};
+	
+	/**
 	 * Initializes the ThemeManager with the provided configuration.
-	 * 
+	 *
 	 * This function will always load the first theme in the array before ending initialization.
 	 *
-	 * @param {ThemeManagerConfig} configurationOverrides - User-specified configuration options to override defaults.
+	 * @param {ThemeManagerConfig} configurationOverrides - User-specified configuration to override defaults.
 	 * @returns {void}
 	 */
 	function initializeThemeManager(configurationOverrides) {
 		// Get default settings then override with specified user inputs.
-		options = { ...getConfigurationDefaults(), ...configurationOverrides };
+		configuration = { ...getConfigurationDefaults(), ...configurationOverrides };
 		
 		// Initialize theme variables.
-		siteThemes = options.themes;
+		siteThemes = configuration.themes;
 		activeThemeIndex = siteThemes.findIndex(theme => document.body.classList.contains(theme));
 		
-		// Initialize element variables.
-		themeButtons = document.querySelectorAll(options.themeButtonSelector);
-		themeButtonWrapper = document.querySelector(options.buttonWrapperSelector);
-		
-		// Initialize events & immediate active theme.
+		// Initialize events & active theme.
 		setupEventListeners();
-		// Always initialize our site to load the first theme in the array.
-		// I plan to make this load whichever theme the user last selected
-		// or to set it automatically based on device/browser preferences.
-		updateTheme(0);
+		updateTheme(0); // TODO (#4): Save users' theme preference.
 	}
 	
 	/**
@@ -96,42 +120,29 @@ const ThemeManager = (function() {
 	 * @returns {void}
 	 */
 	function setupEventListeners() {
-		if (themeButtonWrapper) {
-			themeButtonWrapper.addEventListener("click", selectButtonTheme);
-		}
+		// Set up event listeners based on button wrappers configuration
+		configuration.buttonWrappers.forEach(wrapperConfig => {
+			const wrapper = document.querySelector(wrapperConfig.wrapperSelector);
+			if (wrapper) {
+				const buttons = wrapper.querySelectorAll(wrapperConfig.intendedButtonSelectors);
+				buttons.forEach(button => {
+					button.addEventListener("click", eventHandlersMap[wrapperConfig.eventHandler]);
+				});
+			}
+		});
 		
-		// TODO (#2): Use more configurable button event setup.
-		const buttonsConfig = [
-			{ selector: options.previousButtonSelector, handler: selectPreviousTheme },
-			{ selector: options.randomButtonSelector, handler: selectRandomTheme },
-			{ selector: options.nextButtonSelector, handler: selectNextTheme },
-		];
-		
-		buttonsConfig.forEach(({ selector, handler }) => {
-			setupButtonEvents(selector, handler);
+		// Set up event listeners for standalone buttons
+		configuration.buttons.forEach(buttonConfig => {
+			const button = document.querySelector(buttonConfig.selector);
+			if (button) {
+				button.addEventListener("click", eventHandlersMap[buttonConfig.eventHandler]);
+			}
 		});
 	}
 	
 	// ==============================
 	// Helper Functions
 	// ==============================
-
-	/**
-	 * Configures event listeners for specific buttons.
-	 * 
-	 * It is called from the `setupEventListeners` function, which runs the `forEach` method
-	 * on each of the specified buttons that wasn't in a button wrapper.
-	 *
-	 * @param {string} buttonSelector - The CSS selector for the button.
-	 * @param {Function} buttonEventHandler - The function to call when the button is clicked.
-	 * @returns {void}
-	 */
-	function setupButtonEvents(buttonSelector, buttonEventHandler) {
-		const button = document.querySelector(buttonSelector);
-		if (button) {
-			button.addEventListener("click", buttonEventHandler);
-		}
-	}
 	
 	/**
 	 * Wraps the index around to the other end of the array to ensure it remains valid.
@@ -139,6 +150,10 @@ const ThemeManager = (function() {
 	 * @param {number} indexValue - The index to wrap.
 	 * @param {number} arrayLength - The length of the array.
 	 * @returns {number} A valid index within the array.
+	 * 
+	 * @example
+	 * arrayIndexWrapHandler(4, 4); // returns 0
+	 * arrayIndexWrapHandler(-1, 4); // returns 3
 	 */
 	function arrayIndexWrapHandler(indexValue, arrayLength) {
 		return (indexValue + arrayLength) % arrayLength;
@@ -155,10 +170,12 @@ const ThemeManager = (function() {
 	 * @returns {void}
 	 */
 	function selectButtonTheme(event) {
-		const selectedThemeButton = event.target.closest(options.themeButtonSelector);
+		const selectedThemeButton = event.target.closest("[data-theme]");
 		if (selectedThemeButton) {
 			const selectedTheme = selectedThemeButton.dataset.theme;
-			if (!siteThemes.includes(selectedTheme)) { return; } // Check to make sure button's theme actually exists in our array.
+			if (!siteThemes.includes(selectedTheme)) {
+				return;
+			}
 			updateTheme(siteThemes.indexOf(selectedTheme));
 		}
 	}
@@ -197,7 +214,7 @@ const ThemeManager = (function() {
 	// ==============================
 	// DOM Update Functions
 	// ==============================
-
+	
 	/**
 	 * Adds a new theme class to the document body.
 	 * 
@@ -230,10 +247,11 @@ const ThemeManager = (function() {
 	 * @returns {void}
 	 */
 	function updateThemeButtons() {
-		themeButtons.forEach(button => button.classList.remove(options.activeThemeClass));
-		const activeThemeButton = [...themeButtons].find(button => button.dataset.theme === siteThemes[activeThemeIndex]);
+		const buttons = document.querySelectorAll(configuration.buttonWrappers.map(wrapper => wrapper.intendedButtonSelectors).join(", "));
+		buttons.forEach(button => button.classList.remove(configuration.activeThemeClass));
+		const activeThemeButton = [...buttons].find(button => button.dataset.theme === siteThemes[activeThemeIndex]);
 		if (activeThemeButton) {
-			activeThemeButton.classList.add(options.activeThemeClass);
+			activeThemeButton.classList.add(configuration.activeThemeClass);
 		}
 	}
 	
@@ -259,7 +277,7 @@ const ThemeManager = (function() {
 	// ==============================
 	// Public API
 	// ==============================
-
+	
 	return {
 		initializeThemeManager,
 	};
