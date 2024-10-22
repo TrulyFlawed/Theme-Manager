@@ -50,7 +50,7 @@ body {
 	display: flex;
 	flex-direction: column;
 
-	height: 100vh;
+	height: 100dvh;
 
 	font-size: 1rem;
 	color: var(--primary-text);
