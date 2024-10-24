@@ -178,19 +178,20 @@ p {
 }
 
 .main-theme-switches [data-theme="dark-theme"] {
-	background-color: #000;
+	--primary-background: #000;
+	background-color: var(--primary-background);
 }
-
 .main-theme-switches [data-theme="light-theme"] {
-	background-color: #fff;
+	--primary-background: #fff;
+	background-color: var(--primary-background);
 }
-
 .main-theme-switches [data-theme="pink-theme"] {
-	background-color: #F5A9B8;
+	--primary-background: #f5a9b8;
+	background-color: var(--primary-background);
 }
-
 .main-theme-switches [data-theme="blue-theme"] {
-	background-color: #5BCEFA;
+	--primary-background: #5bcefa;
+	background-color: var(--primary-background);
 }
 
 .misc-theme-switches {
