@@ -11,15 +11,10 @@ It aims for customizability by letting developers configure it to their liking. 
 
 It is primarily intended for use when using more than just two themes, but can still be used for this purpose regardless.
 
-## Personal Goals
-
-This project was also something I've done as an attempt to help me understand JavaScript just a bit more. Perhaps this project may lead me into developing larger and more useful things, but this should suffice for now.
-
-It was also a practice attempt at designing website themes, albeit, very cheaply for the sake of example. In the near future, this project may be used to create much more fleshed-out theming on any future sites or projects of mine.
-
 ## Usage
 
-I still need to write this out in further detail, but essentially you do the following:
+> [!NOTE]
+> These instructions are extremely simplified, I need to write out further details later.
 
 - Add the module to your site.
 - Import it in a JavaScript file you're using on that site.
@@ -33,7 +28,11 @@ This project is open to contribution! I do not yet have any contribution guideli
 
 ## License
 
-This project currently has no license, as I haven't quite yet figured out what I want to set it as yet. However, I believe it will likely be under the MIT license.
+This project is under an MIT license. The project likely won't be something I'll work on forever, so I figure I might as well just let people do what they would like with the code.
+
+I would've used GPLv3, but that seems a bit extreme for this tiny project. If I do more serious work in making this something that's more widely used, I would probably consider it, but not now, as I just don't want to deal with licensing right now.
+
+All I know is that I refuse to put this project under a proprietary license. It will always remain open source and free for all to use.
 
 ## Acknowledgements
 
