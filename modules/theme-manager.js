@@ -65,6 +65,7 @@
 	function getConfigurationDefaults() { // TODO: Improve default configurations.
 		return {
 			themes: ["dark-theme", "light-theme"],
+			defaultTheme: "light-theme",
 			activeThemeClass: "active-theme",
 			buttonWrappers: [],
 			buttons: [],
@@ -110,7 +111,13 @@
 		
 		// Initialize events & active theme.
 		setupEventListeners();
-		updateTheme(0); // TODO (#4): Save users' theme preference.
+		//updateTheme(0); // TODO (#4): Save users' theme preference.
+		
+		// Set default theme as defined in configuration.
+		if (activeThemeIndex === -1) {
+			const defaultTheme = siteThemes.findIndex(theme => configuration.defaultTheme === theme);
+			updateTheme(defaultTheme);
+		}
 	}
 	
 	/**

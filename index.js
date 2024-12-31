@@ -2,6 +2,7 @@ import { ThemeManager } from "./modules/theme-manager.js";
 
 ThemeManager.initializeThemeManager({
 	themes: ["dark-theme", "light-theme", "pink-theme", "blue-theme"],
+	defaultTheme: "light-theme",
 	activeThemeClass: "active-theme",
 	buttonWrappers: [
 		{
