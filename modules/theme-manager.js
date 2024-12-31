@@ -113,6 +113,21 @@
 		setupEventListeners();
 		//updateTheme(0); // TODO (#4): Save users' theme preference.
 		
+		const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		const lightModeQuery = window.matchMedia('(prefers-color-scheme: light)');
+		
+		// Set default theme to default browser/OS theme.
+		// I need to figure out if I want to hard-code the light & dark
+		// themes as "0" (light) and "1" (dark) or not.
+		if (darkModeQuery || lightModeQuery) {
+			if (darkModeQuery.matches) {
+				updateTheme(0);
+			}
+			if (lightModeQuery.matches) {
+				updateTheme(1);
+			}
+		}
+		
 		// Set default theme as defined in configuration.
 		if (activeThemeIndex === -1) {
 			const defaultTheme = siteThemes.findIndex(theme => configuration.defaultTheme === theme);

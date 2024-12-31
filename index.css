@@ -1,7 +1,19 @@
+/* If browser/OS theme default is light or unspecified we
+ * default to light theme. */
 :root {
-	--primary-text: #fff;
-	--primary-background: #000;
-	--secondary-text: #000;
+	--primary-text: #000;
+	--primary-background: #fff;
+	--secondary-text: #fff;
+}
+
+/* If browser/OS theme default is dark, we select
+ * dark to avoid unwanted flash of light on page load. */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--primary-text: #fff;
+		--primary-background: #000;
+		--secondary-text: #000;
+	}
 }
 
 :root .dark-theme {
