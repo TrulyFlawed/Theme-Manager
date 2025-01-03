@@ -1,6 +1,6 @@
 /* If browser/OS theme default is light or unspecified we
  * default to light theme. */
-:root {
+html {
 	--primary-text: #000;
 	--primary-background: #fff;
 	--secondary-text: #fff;
@@ -9,32 +9,32 @@
 /* If browser/OS theme default is dark, we select
  * dark to avoid unwanted flash of light on page load. */
 @media (prefers-color-scheme: dark) {
-	:root {
+	html {
 		--primary-text: #fff;
 		--primary-background: #000;
 		--secondary-text: #000;
 	}
 }
 
-:root .dark-theme {
+html.dark-theme {
 	--primary-text: #fff;
 	--primary-background: #000;
 	--secondary-text: #000;
 }
 
-:root .light-theme {
+html.light-theme {
 	--primary-text: #000;
 	--primary-background: #fff;
 	--secondary-text: #fff;
 }
 
-:root .pink-theme {
+html.pink-theme {
 	--primary-text: #000;
 	--primary-background: #F5A9B8;
 	--secondary-text: #fff;
 }
 
-:root .blue-theme {
+html.blue-theme {
 	--primary-text: #000;
 	--primary-background: #5BCEFA;
 	--secondary-text: #fff;

@@ -5,6 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Theme Manager</title>
 	<link rel="stylesheet" href="index.css" />
+	<script>
+		(function() {
+			console.log(localStorage.getItem("theme"))
+			if (localStorage.getItem("theme") != null) {
+				localStorage.getItem('theme') && 
+        document.documentElement.classList.add(localStorage.getItem('theme'))
+			}
+			return;
+		})()
+	</script>
 	<link rel="icon" type="image/x-icon" href="favicon.ico" />
 </head>
 <body class="">

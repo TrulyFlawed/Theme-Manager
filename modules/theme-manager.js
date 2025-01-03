@@ -107,32 +107,39 @@
 		
 		// Initialize theme variables.
 		siteThemes = configuration.themes;
-		activeThemeIndex = siteThemes.findIndex(theme => document.body.classList.contains(theme));
+		activeThemeIndex = siteThemes.findIndex(theme => document.documentElement.classList.contains(theme));
 		
 		// Initialize events & active theme.
 		setupEventListeners();
-		//updateTheme(0); // TODO (#4): Save users' theme preference.
 		
 		const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		const lightModeQuery = window.matchMedia('(prefers-color-scheme: light)');
 		
-		// Set default theme to default browser/OS theme.
-		// I need to figure out if I want to hard-code the light & dark
-		// themes as "0" (light) and "1" (dark) or not.
-		if (darkModeQuery || lightModeQuery) {
+		const storedThemePreference = getStoredTheme();
+		console.log(storedThemePreference)
+		
+		if (storedThemePreference !== null) {
+			updateTheme(siteThemes.indexOf(localStorage.getItem("theme")))
+		} // Set default theme to default browser/OS theme.
+		else if (darkModeQuery || lightModeQuery) {
 			if (darkModeQuery.matches) {
 				updateTheme(0);
 			}
 			if (lightModeQuery.matches) {
 				updateTheme(1);
 			}
-		}
-		
-		// Set default theme as defined in configuration.
-		if (activeThemeIndex === -1) {
+		} // Set default theme as defined in configuration.
+		else {
 			const defaultTheme = siteThemes.findIndex(theme => configuration.defaultTheme === theme);
 			updateTheme(defaultTheme);
 		}
+	}
+	
+	function getStoredTheme() {
+		if (typeof Storage !== 'undefined') {
+            return localStorage.getItem("theme");
+        }
+        return false;
 	}
 	
 	/**
@@ -247,7 +254,7 @@
 	 * @returns {void}
 	 */
 	function addThemeClass(newThemeIndex) {
-		document.body.classList.add(siteThemes[newThemeIndex]);
+		document.documentElement.classList.add(siteThemes[newThemeIndex]);
 	}
 	
 	/**
@@ -260,7 +267,7 @@
 	 * @returns {void}
 	 */
 	function replaceThemeClass(newThemeIndex) {
-		document.body.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
+		document.documentElement.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
 	}
 	
 	/**
@@ -288,8 +295,10 @@
 			// If there isn't a theme found on the document body we add a new theme class to the body element.
 			if (activeThemeIndex === -1) {
 				addThemeClass(newThemeIndex);
+				localStorage.setItem("theme", siteThemes[newThemeIndex])
 			} else { // Otherwise we just replace one theme class with another.
 				replaceThemeClass(newThemeIndex);
+				localStorage.setItem("theme", siteThemes[newThemeIndex])
 			}
 			activeThemeIndex = newThemeIndex;
 			updateThemeButtons();
