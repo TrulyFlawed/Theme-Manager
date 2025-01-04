@@ -40,9 +40,9 @@ I would like to thank the following projects, individuals, and/or groups/organiz
 
 | Subject | Contributions |
 | ------- | ------------- |
-| Boxicons | Providing free icons for use on the web. |
-| SnareChops | Providing help in displaying active theme indicators on buttons. |
-| Max Böck | Wrote [this article on dynamic site theming](https://mxb.dev/blog/color-theme-switcher/). |
-| Mike Foskett | Wrote [this article with CSS media query examples](https://codepen.io/2kool2/pen/abzgPzJ). |
-| Kilian Valkhof | Wrote [this article about system theme preferences](https://kilianvalkhof.com/2020/design/your-dark-mode-toggle-is-broken/). |
+| [Boxicons](https://boxicons.com/) | Providing free icons for use on the web. |
+| [SnareChops](https://github.com/SnareChops) | Providing help in displaying active theme indicators on buttons. |
+| [Max Böck](https://mxb.dev/) | Wrote [this article on dynamic site theming](https://mxb.dev/blog/color-theme-switcher/). |
+| [Mike Foskett](https://www.linkedin.com/in/mikefoskett) | Wrote [this article with CSS media query examples](https://codepen.io/2kool2/pen/abzgPzJ). |
+| [Kilian Valkhof](https://kilianvalkhof.com/) | Wrote [this article about system theme preferences](https://kilianvalkhof.com/2020/design/your-dark-mode-toggle-is-broken/). |
 | [Toby](https://tobot.dev/) | Helped me fix an issue where tapping too quickly would lead to zooming in on mobile. |
