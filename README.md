@@ -38,7 +38,10 @@ All I know is that I refuse to put this project under a proprietary license. It 
 
 I would like to thank the following projects, individuals, and/or groups/organizations for their contribution to this project, either directly or indirectly:
 
-| Subject    | Contributions                                                    |
-| ---------- | ---------------------------------------------------------------- |
-| Boxicons   | Providing free icons for use on the web.                         |
+| Subject | Contributions |
+| ------- | ------------- |
+| Boxicons | Providing free icons for use on the web. |
 | SnareChops | Providing help in displaying active theme indicators on buttons. |
+| Max Böck | Wrote [this article on dynamic site theming](https://mxb.dev/blog/color-theme-switcher/). |
+| Mike Foskett | Wrote [this article with CSS media query examples](https://codepen.io/2kool2/pen/abzgPzJ). |
+| Kilian Valkhof | Wrote [this article about system theme preferences](https://kilianvalkhof.com/2020/design/your-dark-mode-toggle-is-broken/). |
