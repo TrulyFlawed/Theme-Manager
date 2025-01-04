@@ -116,7 +116,6 @@
 		const lightModeQuery = window.matchMedia('(prefers-color-scheme: light)');
 		
 		const storedThemePreference = getStoredTheme();
-		console.log(storedThemePreference)
 		
 		if (storedThemePreference !== null) {
 			updateTheme(siteThemes.indexOf(localStorage.getItem("theme")))
