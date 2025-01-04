@@ -45,3 +45,4 @@ I would like to thank the following projects, individuals, and/or groups/organiz
 | Max Böck | Wrote [this article on dynamic site theming](https://mxb.dev/blog/color-theme-switcher/). |
 | Mike Foskett | Wrote [this article with CSS media query examples](https://codepen.io/2kool2/pen/abzgPzJ). |
 | Kilian Valkhof | Wrote [this article about system theme preferences](https://kilianvalkhof.com/2020/design/your-dark-mode-toggle-is-broken/). |
+| [Toby](https://tobot.dev/) | Helped me fix an issue where tapping too quickly would lead to zooming in on mobile. |
