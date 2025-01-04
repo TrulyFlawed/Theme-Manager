@@ -26,9 +26,3 @@ ThemeManager.initializeThemeManager({
 		}
 	]
 });
-
-const buttons = document.querySelectorAll(".theme-buttons");
-const activeThemeButton = [...buttons].find(button => button.dataset.theme === localStorage.getItem('theme'));
-if (activeThemeButton) {
-	activeThemeButton.classList.add("active-theme");
-}
