@@ -122,10 +122,10 @@
 		} // Set default theme to default browser/OS theme.
 		else if (darkModeQuery || lightModeQuery) {
 			if (darkModeQuery.matches) {
-				updateTheme(0);
+				updateTheme(1);
 			}
 			if (lightModeQuery.matches) {
-				updateTheme(1);
+				updateTheme(2);
 			}
 		} // Set default theme as defined in configuration.
 		else {
