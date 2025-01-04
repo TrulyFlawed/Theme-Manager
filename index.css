@@ -200,9 +200,17 @@ p {
 }
 
 .main-theme-switches [data-theme="system-theme"] {
-	--primary-background: #7c7c7c;
+	--primary-background: transparent;
 	background-color: var(--primary-background);
+	color: var(--primary-text);
+	padding: 0;
 }
+.main-theme-switches [data-theme="system-theme"] svg {
+	width: 2.25rem;
+	height: 2.25rem;
+	fill: currentColor;
+}
+
 .main-theme-switches [data-theme="dark-theme"] {
 	--primary-background: #000;
 	background-color: var(--primary-background);
