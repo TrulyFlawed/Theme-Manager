@@ -108,6 +108,7 @@ button {
 
 	transition: ease 0.15s;
 	touch-action: manipulation;
+	user-select: none;
 }
 
 .misc-theme-button:focus-visible {
