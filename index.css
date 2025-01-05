@@ -111,6 +111,15 @@ button {
 	user-select: none;
 }
 
+@media (hover: hover) {
+	.misc-theme-button:hover {
+		color: var(--primary-text);
+		background-color: var(--primary-background);
+		outline: 2px solid var(--primary-text);
+		fill: var(--primary-text);
+	}
+}
+
 .misc-theme-button:focus-visible {
 	color: var(--primary-text);
 	background-color: var(--primary-background);
@@ -192,14 +201,7 @@ p {
 /* Needed to prevent mobile browsers from fucking up
  * the tapping behavior by keeping the hover/focus
  * effect around after you're done tapping the element. */
-@media (hover: hover) {
-	.misc-theme-button:hover {
-		color: var(--primary-text);
-		background-color: var(--primary-background);
-		outline: 2px solid var(--primary-text);
-		fill: var(--primary-text);
-	}
-	
+@media (hover: hover) {	
 	.main-theme-switches button:hover {
 		outline: 2px solid var(--primary-text);
 		outline-offset: 3px;
@@ -217,7 +219,7 @@ p {
 }
 
 .main-theme-switches button:active {
-	outline: 4px solid var(--primary-text);
+	outline: 2px solid var(--primary-text);
 	outline-offset: 3px;
 }
 
@@ -233,8 +235,9 @@ p {
 }
 
 .main-theme-switches button.active-theme:active {
-	outline: 4px solid var(--primary-text);
-	outline-offset: 3px;
+	border: 0px solid transparent;
+	outline: 6px solid var(--primary-text);
+	outline-offset: 0px;
 }
 
 .main-theme-switches [data-theme="system-theme"] {
