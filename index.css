@@ -110,15 +110,15 @@ button {
 	touch-action: manipulation;
 }
 
-button:focus-visible,
-button:hover {
+.misc-theme-button:focus-visible,
+.misc-theme-button:hover {
 	color: var(--primary-text);
 	background-color: var(--primary-background);
 	outline: 2px solid var(--primary-text);
 	fill: var(--primary-text);
 }
 
-button svg {
+.misc-theme-button svg {
 	width: 1.5rem;
 	height: 1.5rem;
 }
