@@ -16,6 +16,8 @@ html {
 	}
 }
 
+/* This rule is responsible for dynamically updating
+ * the theme based on system/browser preferences. */
 html.system-theme {
 	@media (prefers-color-scheme: dark) {
 		html {
