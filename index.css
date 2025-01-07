@@ -293,6 +293,9 @@ p {
     height: 2.75rem;
     background-color: var(--primary-text);
 	transition: ease 0.15s;
+	
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 @media (max-width: 300px) {
