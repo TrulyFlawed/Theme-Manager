@@ -157,6 +157,9 @@ a {
 	fill: var(--primary-text);
 
 	transition: ease 0.15s;
+	
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 a:hover {
@@ -179,6 +182,9 @@ a svg {
 p {
 	margin: 5px;
 	text-align: center;
+	
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .main-theme-switches {
