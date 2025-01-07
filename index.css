@@ -109,6 +109,7 @@ button {
 	transition: ease 0.15s;
 	touch-action: manipulation;
 	user-select: none;
+	cursor: pointer;
 }
 
 @media (hover: hover) {
