@@ -265,19 +265,15 @@ p {
 
 .main-theme-switches [data-theme="dark-theme"] {
 	--primary-background: #000;
-	background-color: var(--primary-background);
 }
 .main-theme-switches [data-theme="light-theme"] {
 	--primary-background: #fff;
-	background-color: var(--primary-background);
 }
 .main-theme-switches [data-theme="pink-theme"] {
 	--primary-background: #f5a9b8;
-	background-color: var(--primary-background);
 }
 .main-theme-switches [data-theme="blue-theme"] {
 	--primary-background: #5bcefa;
-	background-color: var(--primary-background);
 }
 
 .misc-theme-switches {
