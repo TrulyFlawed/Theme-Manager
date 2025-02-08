@@ -1,4 +1,43 @@
 /**
+ * @typedef {Object} ThemeManagerConfiguration
+ * @property {string[]} themes - An array of available theme class names.
+ * @property {string} activeThemeClass - Class name for the active theme button.
+ * @property {Object[]} buttonWrappers - An array of configurations for button wrappers.
+ * @property {string} buttonWrappers[].wrapperSelector - A CSS selector for the button wrapper.
+ * @property {string} buttonWrappers[].intendedButtonSelectors - A CSS selector for the buttons within the wrapper.
+ * @property {string} buttonWrappers[].eventHandler - The name of the event handler function to call when a button is clicked.
+ * @property {Object[]} buttons - An array of configurations for standalone buttons.
+ * @property {string} buttons[].selector - A CSS selector for the standalone button.
+ * @property {string} buttons[].eventHandler - The name of the event handler function to call when the button is clicked.
+ */
+const CONFIGURATION_DEFAULTS = {
+	themes: ["dark", "light"],
+	defaultThemeFallback: "light",
+	activeThemeClass: "active-theme",
+	buttonWrappers: [
+		{
+			wrapperSelector: ".theme-switches",
+			intendedButtonSelectors: ".theme-selection-buttons",
+			eventHandler: "selectButtonTheme"
+		}
+	],
+	buttons: [
+		{
+			selector: "#previous-theme-control",
+			eventHandler: "selectPreviousTheme"
+		},
+		{
+			selector: "#random-theme-control",
+			eventHandler: "selectRandomTheme"
+		},
+		{
+			selector: "#next-theme-control",
+			eventHandler: "selectNextTheme"
+		}
+	]
+}
+
+/**
  * ThemeManager Module
  *
  * This module manages our site's theme logtic.
@@ -6,171 +45,103 @@
  * new color schemes. The included API initializes the module
  * with custom configurations.
  *
- * @module ThemeManager
- * @example
- *	ThemeManager.initializeThemeManager({
- *		themes: ["dark-theme", "light-theme", "pink-theme", "blue-theme"],
- *		activeThemeClass: "active-theme",
- *		buttonWrappers: [
- *			{
- *				wrapperSelector: ".button-wrapper-class",
- *				intendedButtonSelectors: ".buttons-that-get-event-assigned",
- *				eventHandler: "selectButtonTheme"
- *			}
- *		],
- *		buttons: [
- *			{
- *				selector: "#button-id",
- *				eventHandler: "selectNextTheme"
- *			}
- *		]
- *	});
+ * @module ThemeManagerModule
  */
- const ThemeManager = (function() {
-	
-	// ==============================
-	// Private Variables
-	// ==============================
-	
-	let siteThemes = [];
-	let activeThemeIndex = -1;
-	let configuration = {};
-	
-	// ==============================
-	// Initialization
-	// ==============================
-	
-	/**
-	 * @typedef {Object} ThemeManagerConfig
-	 * @property {string[]} themes - An array of available theme class names.
-	 * @property {string} activeThemeClass - Class name for the active theme button.
-	 * @property {Object[]} buttonWrappers - An array of configurations for button wrappers.
-	 * @property {string} buttonWrappers[].wrapperSelector - A CSS selector for the button wrapper.
-	 * @property {string} buttonWrappers[].intendedButtonSelectors - A CSS selector for the buttons within the wrapper.
-	 * @property {string} buttonWrappers[].eventHandler - The name of the event handler function to call when a button is clicked.
-	 * @property {Object[]} buttons - An array of configurations for standalone buttons.
-	 * @property {string} buttons[].selector - A CSS selector for the standalone button.
-	 * @property {string} buttons[].eventHandler - The name of the event handler function to call when the button is clicked.
-	 */
-	
-	/**
-	 * Retrieves the default theme configurations.
-	 * 
-	 * I need to come up with better default names. For now they will remain
-	 * as the website's used names.
-	 *
-	 * @returns {ThemeManagerConfig} Default configuration object with it's
-	 * themes and element selectors.
-	 */
-	function getConfigurationDefaults() { // TODO: Improve default configurations.
-		return {
-			themes: ["dark-theme", "light-theme"],
-			defaultTheme: "light-theme",
-			activeThemeClass: "active-theme",
-			buttonWrappers: [],
-			buttons: [],
-		}
-	}
-	
-	/**
-	 * @typedef {Object} EventHandlersMap
-	 * @property {Function} selectButtonTheme - Handles the theme selection based on the clicked button.
-	 * @property {Function} selectNextTheme - Handles the action of selecting the next theme in the array.
-	 * @property {Function} selectPreviousTheme - Handles the action of selecting the previous theme in the array.
-	 * @property {Function} selectRandomTheme - Handles the action of selecting a random theme from the available themes.
-	 */
-	
-	/**
-	 * A collection of the available internal methods we want to
-	 * "expose" and apply to our buttons & wrappers.
-	 *
-	 * @type {EventHandlersMap}
-	 */
-	const eventHandlersMap = {
-		selectButtonTheme,
-		selectNextTheme,
-		selectPreviousTheme,
-		selectRandomTheme,
-	};
-	
+class ThemeManagerModule {
 	/**
 	 * Initializes the ThemeManager with the provided configuration.
 	 *
-	 * This function will always load the first theme in the array before ending initialization.
-	 *
-	 * @param {ThemeManagerConfig} configurationOverrides - User-specified configuration to override defaults.
+	 * @param {ThemeManagerConfiguration} configurationOverrides - User-specified configuration to override defaults.
 	 * @returns {void}
 	 */
-	function initializeThemeManager(configurationOverrides) {
+	constructor(configurationOverrides = CONFIGURATION_DEFAULTS) {
+		this.configuration = { ...CONFIGURATION_DEFAULTS, ...configurationOverrides };
+		
+		this.siteThemes = this.configuration.themes;
+		this.defaultTheme = this.configuration.defaultThemeFallback;
+		this.activeThemeClass = this.configuration.activeThemeClass;
+				
 		// Get default settings then override with specified user inputs.
-		configuration = { ...getConfigurationDefaults(), ...configurationOverrides };
+		this.activeThemeIndex = this.siteThemes.findIndex(theme => document.documentElement.classList.contains(theme));
 		
-		// Initialize theme variables.
-		siteThemes = configuration.themes;
-		activeThemeIndex = siteThemes.findIndex(theme => document.documentElement.classList.contains(theme));
-		
-		// Initialize events & active theme.
-		setupEventListeners();
+		this.setupEventListeners();
 		
 		const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		const lightModeQuery = window.matchMedia('(prefers-color-scheme: light)');
 		
-		const storedThemePreference = getStoredTheme();
+		const storedThemePreference = this.getStoredTheme();
 		
+		this.determineInitialTheme(darkModeQuery, lightModeQuery, storedThemePreference);
+	};
+	
+	/**
+	 * Defines what the initial theme of the site should be upon loading
+	 * through stored user preferences, default OS/browser preferences,
+	 * and the default (fallback) theme set by the developer.
+	 * 
+	 * @param {MediaQueryList} darkModeQuery 
+	 * @param {MediaQueryList} lightModeQuery 
+	 * @param {string | false | null} storedThemePreference
+	 * 
+	 * @returns {void}
+	 */
+	determineInitialTheme(darkModeQuery, lightModeQuery, storedThemePreference) {
+		// Set theme to whatever is stored.
 		if (storedThemePreference !== null) {
-			updateTheme(siteThemes.indexOf(localStorage.getItem("theme")))
+			this.updateTheme(this.siteThemes.indexOf(localStorage.getItem("theme")))
 		} // Set default theme to default browser/OS theme.
 		else if (darkModeQuery || lightModeQuery) {
 			if (darkModeQuery.matches) {
-				updateTheme(1);
+				this.updateTheme(1);
 			}
 			if (lightModeQuery.matches) {
-				updateTheme(2);
+				this.updateTheme(2);
 			}
 		} // Set default theme as defined in configuration.
 		else {
-			const defaultTheme = siteThemes.findIndex(theme => configuration.defaultTheme === theme);
-			updateTheme(defaultTheme);
+			const defaultTheme = this.siteThemes.findIndex(theme => this.configuration.defaultTheme === theme);
+			this.updateTheme(defaultTheme);
 		}
-	}
-	
-	function getStoredTheme() {
-		if (typeof Storage !== 'undefined') {
-            return localStorage.getItem("theme");
-        }
-        return false;
-	}
+	};
 	
 	/**
 	 * Sets up the necessary event listeners for our theming using the
-	 * given configurations.
+	 * module's given configurations.
 	 *
 	 * @returns {void}
 	 */
-	function setupEventListeners() {
+	setupEventListeners() {
 		// Set up event listeners based on button wrappers configuration
-		configuration.buttonWrappers.forEach(wrapperConfig => {
+		this.configuration.buttonWrappers.forEach(wrapperConfig => {
 			const wrapper = document.querySelector(wrapperConfig.wrapperSelector);
 			if (wrapper) {
 				const buttons = wrapper.querySelectorAll(wrapperConfig.intendedButtonSelectors);
 				buttons.forEach(button => {
-					button.addEventListener("click", eventHandlersMap[wrapperConfig.eventHandler]);
+					button.addEventListener("click", this[wrapperConfig.eventHandler].bind(this));
 				});
 			}
 		});
 		
 		// Set up event listeners for standalone buttons
-		configuration.buttons.forEach(buttonConfig => {
+		this.configuration.buttons.forEach(buttonConfig => {
 			const button = document.querySelector(buttonConfig.selector);
 			if (button) {
-				button.addEventListener("click", eventHandlersMap[buttonConfig.eventHandler]);
+				button.addEventListener("click", this[buttonConfig.eventHandler].bind(this));
 			}
 		});
 	}
 	
-	// ==============================
-	// Helper Functions
-	// ==============================
+	/**
+	 * Returns the currently stored user theme.
+	 * 
+	 * @returns {localStorage}
+	 */
+	getStoredTheme() {
+		if (typeof Storage !== 'undefined') {
+            return localStorage.getItem("theme");
+        }
+        return false;
+	}
 	
 	/**
 	 * Wraps the index around to the other end of the array to ensure it remains valid.
@@ -183,13 +154,9 @@
 	 * arrayIndexWrapHandler(4, 4); // returns 0
 	 * arrayIndexWrapHandler(-1, 4); // returns 3
 	 */
-	function arrayIndexWrapHandler(indexValue, arrayLength) {
+	arrayIndexWrapHandler(indexValue, arrayLength) {
 		return (indexValue + arrayLength) % arrayLength;
 	}
-	
-	// ==============================
-	// Theme Selection Functions
-	// ==============================
 	
 	/**
 	 * Selects the theme based on the specific clicked button's data-theme attribute.
@@ -197,14 +164,14 @@
 	 * @param {MouseEvent} event - The click event triggered by the theme button.
 	 * @returns {void}
 	 */
-	function selectButtonTheme(event) {
+	selectButtonTheme(event) {
 		const selectedThemeButton = event.target.closest("[data-theme]");
 		if (selectedThemeButton) {
 			const selectedTheme = selectedThemeButton.dataset.theme;
-			if (!siteThemes.includes(selectedTheme)) {
+			if (!this.siteThemes.includes(selectedTheme)) {
 				return;
 			}
-			updateTheme(siteThemes.indexOf(selectedTheme));
+			this.updateTheme(this.siteThemes.indexOf(selectedTheme));
 		}
 	}
 	
@@ -213,8 +180,8 @@
 	 *
 	 * @returns {void}
 	 */
-	function selectNextTheme() {
-		updateTheme(arrayIndexWrapHandler(activeThemeIndex + 1, siteThemes.length));
+	selectNextTheme() {
+		this.updateTheme(this.arrayIndexWrapHandler(this.activeThemeIndex + 1, this.siteThemes.length));
 	}
 	
 	/**
@@ -222,8 +189,8 @@
 	 *
 	 * @returns {void}
 	 */
-	function selectPreviousTheme() {
-		updateTheme(arrayIndexWrapHandler(activeThemeIndex - 1, siteThemes.length));
+	selectPreviousTheme() {
+		this.updateTheme(this.arrayIndexWrapHandler(this.activeThemeIndex - 1, this.siteThemes.length));
 	}
 	
 	/**
@@ -231,17 +198,27 @@
 	 *
 	 * @returns {void}
 	 */
-	function selectRandomTheme() {
+	selectRandomTheme() {
 		let randomThemeIndex;
 		do {
-			randomThemeIndex = Math.floor(Math.random() * siteThemes.length);
-		} while (randomThemeIndex === activeThemeIndex);
-		updateTheme(randomThemeIndex);
+			randomThemeIndex = Math.floor(Math.random() * this.siteThemes.length);
+		} while (randomThemeIndex === this.activeThemeIndex);
+		this.updateTheme(randomThemeIndex);
 	}
 	
-	// ==============================
-	// DOM Update Functions
-	// ==============================
+	/**
+	 * Updates the active theme button classes based on the currently active theme.
+	 *
+	 * @returns {void}
+	 */
+	updateThemeButtons() {
+		const buttons = document.querySelectorAll(this.configuration.buttonWrappers.map(wrapper => wrapper.intendedButtonSelectors).join(", "));
+		buttons.forEach(button => button.classList.remove(this.configuration.activeThemeClass));
+		const activeThemeButton = [...buttons].find(button => button.dataset.theme === this.siteThemes[this.activeThemeIndex]);
+		if (activeThemeButton) {
+			activeThemeButton.classList.add(this.configuration.activeThemeClass);
+		}
+	}
 	
 	/**
 	 * Adds a new theme class to the document body.
@@ -252,8 +229,8 @@
 	 * @param {number} newThemeIndex - The index of the new theme to add.
 	 * @returns {void}
 	 */
-	function addThemeClass(newThemeIndex) {
-		document.documentElement.classList.add(siteThemes[newThemeIndex]);
+	addThemeClass(newThemeIndex) {
+		document.documentElement.classList.add(this.siteThemes[newThemeIndex]);
 	}
 	
 	/**
@@ -265,22 +242,8 @@
 	 * @param {number} newThemeIndex - The index of the new theme to replace the current theme.
 	 * @returns {void}
 	 */
-	function replaceThemeClass(newThemeIndex) {
-		document.documentElement.classList.replace(siteThemes[activeThemeIndex], siteThemes[newThemeIndex]);
-	}
-	
-	/**
-	 * Updates the active theme button classes based on the currently active theme.
-	 *
-	 * @returns {void}
-	 */
-	function updateThemeButtons() {
-		const buttons = document.querySelectorAll(configuration.buttonWrappers.map(wrapper => wrapper.intendedButtonSelectors).join(", "));
-		buttons.forEach(button => button.classList.remove(configuration.activeThemeClass));
-		const activeThemeButton = [...buttons].find(button => button.dataset.theme === siteThemes[activeThemeIndex]);
-		if (activeThemeButton) {
-			activeThemeButton.classList.add(configuration.activeThemeClass);
-		}
+	replaceThemeClass(newThemeIndex) {
+		document.documentElement.classList.replace(this.siteThemes[this.activeThemeIndex], this.siteThemes[newThemeIndex]);
 	}
 	
 	/**
@@ -289,28 +252,20 @@
 	 * @param {number} newThemeIndex - The index of the theme to update to.
 	 * @returns {void}
 	 */
-	function updateTheme(newThemeIndex) {
-		if (newThemeIndex !== activeThemeIndex) {
+	updateTheme(newThemeIndex) {
+		if (newThemeIndex !== this.activeThemeIndex) {
 			// If there isn't a theme found on the document body we add a new theme class to the body element.
-			if (activeThemeIndex === -1) {
-				addThemeClass(newThemeIndex);
-				localStorage.setItem("theme", siteThemes[newThemeIndex])
+			if (this.activeThemeIndex === -1) {
+				this.addThemeClass(newThemeIndex);
+				localStorage.setItem("theme", this.siteThemes[newThemeIndex])
 			} else { // Otherwise we just replace one theme class with another.
-				replaceThemeClass(newThemeIndex);
-				localStorage.setItem("theme", siteThemes[newThemeIndex])
+				this.replaceThemeClass(newThemeIndex);
+				localStorage.setItem("theme", this.siteThemes[newThemeIndex])
 			}
-			activeThemeIndex = newThemeIndex;
-			updateThemeButtons();
+			this.activeThemeIndex = newThemeIndex;
+			this.updateThemeButtons();
 		}
 	}
-	
-	// ==============================
-	// Public API
-	// ==============================
-	
-	return {
-		initializeThemeManager,
-	};
-})();
+}
 
-export { ThemeManager };
+export { ThemeManagerModule };

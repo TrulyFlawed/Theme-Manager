@@ -1,6 +1,6 @@
-import { ThemeManager } from "./modules/theme-manager.js";
+import { ThemeManagerModule } from "./modules/theme-manager.js";
 
-ThemeManager.initializeThemeManager({
+const THEME_MANAGER_CONFIGURATION = {
 	themes: ["system-theme", "dark-theme", "light-theme", "pink-theme", "blue-theme"],
 	defaultTheme: "light-theme",
 	activeThemeClass: "active-theme",
@@ -25,4 +25,6 @@ ThemeManager.initializeThemeManager({
 			eventHandler: "selectNextTheme"
 		}
 	]
-});
+}
+
+const ThemeManager = new ThemeManagerModule(THEME_MANAGER_CONFIGURATION);
