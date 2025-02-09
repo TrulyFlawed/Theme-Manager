@@ -155,24 +155,26 @@ a {
 	text-underline-offset: 0.2em;
 
 	outline: 0px solid transparent;
-
 	fill: var(--primary-text);
-
 	transition: ease 0.15s;
 	
 	user-select: none;
 	-webkit-user-select: none;
+	padding: 0.125rem;
+	border-radius: 0.25rem;
 }
 
-a:hover {
-	text-decoration-thickness: 2px;
-	text-underline-offset: .4em;
+a span {
+	/* Visual correction of "differences"
+	 * in left & right padding. */
+	padding-left: 0.125rem;
 }
 
+a:hover,
 a:focus-visible {
-	text-decoration: none;
-	outline: 2px solid var(--primary-text);
-	outline-offset: 1px;
+	text-decoration: transparent 0;
+	background-color: var(--primary-text);
+	color: var(--primary-background);
 }
 
 a svg {
@@ -182,8 +184,10 @@ a svg {
 }
 
 p {
-	margin: 5px;
+	margin: 0.125rem;
 	text-align: center;
+	
+	white-space: normal;
 	
 	user-select: none;
 	-webkit-user-select: none;
