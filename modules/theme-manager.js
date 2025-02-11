@@ -11,7 +11,7 @@
  * @property {string} buttons[].eventHandler - The name of the event handler function to call when the button is clicked.
  */
 const CONFIGURATION_DEFAULTS = {
-	themes: ["dark", "light"],
+	themes: ["system", "dark", "light"],
 	defaultThemeFallback: "light",
 	activeThemeClass: "active-theme",
 	buttonWrappers: [
@@ -71,7 +71,7 @@ class ThemeManagerModule {
 		
 		const storedThemePreference = this.getStoredTheme();
 		
-		this.determineInitialTheme(darkModeQuery, lightModeQuery, storedThemePreference);
+		this.setInitialTheme(darkModeQuery, lightModeQuery, storedThemePreference);
 	};
 	
 	/**
@@ -85,24 +85,55 @@ class ThemeManagerModule {
 	 * 
 	 * @returns {void}
 	 */
-	determineInitialTheme(darkModeQuery, lightModeQuery, storedThemePreference) {
-		// Set theme to whatever is stored.
-		if (storedThemePreference !== null) {
-			this.updateTheme(this.siteThemes.indexOf(localStorage.getItem("theme")))
-		} // Set default theme to default browser/OS theme.
-		else if (darkModeQuery || lightModeQuery) {
-			if (darkModeQuery.matches) {
-				this.updateTheme(1);
-			}
-			if (lightModeQuery.matches) {
-				this.updateTheme(2);
-			}
-		} // Set default theme as defined in configuration.
+	setInitialTheme(darkModeQuery, lightModeQuery, storedThemePreference) {
+		if (storedThemePreference !== null && storedThemePreference !== "undefined") {
+			this.applyStoredTheme(storedThemePreference)
+		}
+		else if (darkModeQuery.matches || lightModeQuery.matches) {
+			this.applySystemTheme(darkModeQuery, lightModeQuery);
+		}
 		else {
-			const defaultTheme = this.siteThemes.findIndex(theme => this.configuration.defaultTheme === theme);
-			this.updateTheme(defaultTheme);
+			this.applyDefaultTheme();
 		}
 	};
+	
+	/**
+	 * Applies the theme that is stored
+	 *
+	 * @returns {void}
+	 */
+	applyStoredTheme(storedThemePreference) {
+		const storedThemeIndex = this.siteThemes.indexOf(storedThemePreference);
+		if (storedThemeIndex !== -1) {
+			this.updateTheme(storedThemeIndex);
+		}
+	}
+	
+	/**
+	 * Applies the theme based on a user's system/browser
+	 * preferences.
+	 *
+	 * @returns {void}
+	 */
+	applySystemTheme(darkModeQuery, lightModeQuery) {
+		if (darkModeQuery.matches) {
+			this.updateTheme(this.siteThemes.indexOf("dark-theme")); // TODO: have dark & light themes not be hard-coded.
+		}
+		if (lightModeQuery.matches) {
+			this.updateTheme(this.siteThemes.indexOf("light-theme"));
+		}
+	}
+	
+	/**
+	 * Applies the default fallback theme as defined in the module
+	 * configuration.
+	 *
+	 * @returns {void}
+	 */
+	applyDefaultTheme() {
+		const defaultThemeIndex = this.siteThemes.indexOf(this.configuration.defaultThemeFallback);
+		this.updateTheme(defaultThemeIndex);
+	}
 	
 	/**
 	 * Sets up the necessary event listeners for our theming using the
