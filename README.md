@@ -14,7 +14,7 @@ It is primarily intended for use when using more than just two themes, but can s
 ## Usage
 
 > [!NOTE]
-> These instructions are extremely simplified, I need to write out further details later.
+> These instructions are outdated, for better reference of use please see the repository's `index.js` file.
 
 - Add the module to your site.
 - Import it in a JavaScript file you're using on that site.
