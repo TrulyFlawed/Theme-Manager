@@ -146,9 +146,11 @@ class ThemeManagerModule {
 		this.configuration.buttonWrappers.forEach(wrapperConfig => {
 			const wrapper = document.querySelector(wrapperConfig.wrapperSelector);
 			if (wrapper) {
-				const buttons = wrapper.querySelectorAll(wrapperConfig.intendedButtonSelectors);
-				buttons.forEach(button => {
-					button.addEventListener("click", this[wrapperConfig.eventHandler].bind(this));
+				wrapper.addEventListener("click", (event) => {
+					const button = event.target.closest(wrapperConfig.intendedButtonSelectors);
+					if (button) {
+						this[wrapperConfig.eventHandler].call(this, event);
+					}
 				});
 			}
 		});
