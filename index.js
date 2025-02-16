@@ -2,7 +2,7 @@ import { ThemeManagerModule } from "./modules/theme-manager.js";
 
 const THEME_MANAGER_CONFIGURATION = {
 	themes: ["system-theme", "dark-theme", "light-theme", "pink-theme", "blue-theme"],
-	defaultTheme: "light-theme",
+	defaultThemeFallback: "light-theme",
 	activeThemeClass: "active-theme",
 	buttonWrappers: [
 		{
@@ -23,7 +23,7 @@ const THEME_MANAGER_CONFIGURATION = {
 		{
 			selector: "#next-theme-button",
 			eventHandler: "selectNextTheme"
-		}
+		},
 	]
 }
 

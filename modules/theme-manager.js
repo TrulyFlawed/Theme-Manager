@@ -1,3 +1,5 @@
+import { configurationValidationModule } from "./configuration-validator.js"
+
 /**
  * @typedef {Object} ThemeManagerConfiguration
  * @property {string[]} themes - An array of available theme class names.
@@ -55,6 +57,9 @@ class ThemeManagerModule {
 	 * @returns {void}
 	 */
 	constructor(configurationOverrides = CONFIGURATION_DEFAULTS) {
+		const configurationValidator = new configurationValidationModule(configurationOverrides, this);
+		configurationValidator.validate(configurationOverrides);
+		
 		this.configuration = { ...CONFIGURATION_DEFAULTS, ...configurationOverrides };
 		
 		this.siteThemes = this.configuration.themes;
