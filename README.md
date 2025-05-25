@@ -7,9 +7,13 @@ This is a small project to aims to make customizing site theming easier than eve
 
 ## Development Goals
 
-It aims for customizability by letting developers configure it to their liking. There are certain caveats to customization, but I plan on improving it with time.
+The project's aim is to provide you with a progressively enhanced module to your site. It does not aim to be an all-in-one solution, and primarily aims to make processing and storing users' preferences easy.
 
-It is primarily intended for use when using more than just two themes, but can still be used for this purpose regardless.
+This module does not:
+
+- Enforce the usage of a specific DOM structure upon you.
+- Limit the number of themes you may define and use.
+- Stuff your site with a bunch of event listeners.
 
 ## Usage
 
