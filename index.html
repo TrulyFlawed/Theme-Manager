@@ -6,13 +6,8 @@
 	<title>Theme Manager</title>
 	<link rel="stylesheet" href="index.css" />
 	<script>
-		(function() {
-			if (localStorage.getItem("theme") != null) {
-				localStorage.getItem('theme') && 
-        document.documentElement.classList.add(localStorage.getItem('theme'))
-			}
-			return;
-		})()
+		// Use theme from localStorage to avoid flash of incorrect theme
+		localStorage.getItem('theme') && document.documentElement.classList.add(localStorage.getItem('theme'))
 	</script>
 	<link rel="icon" type="image/x-icon" href="favicon.ico" />
 </head>
